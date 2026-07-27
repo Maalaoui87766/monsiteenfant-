@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>شهادة الإنجاز</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.certificate{
+
+background:white;
+margin:20px;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 15px #bbb;
+
+}
+
+.title{
+
+font-size:32px;
+font-weight:bold;
+color:#4CAF50;
+
+}
+
+.name{
+
+font-size:28px;
+margin:20px;
+font-weight:bold;
+
+}
+
+.stars{
+
+font-size:24px;
+margin:20px;
+
+}
+
+button{
+
+padding:15px 25px;
+font-size:20px;
+border:none;
+border-radius:15px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+🏅 شهادة الإنجاز
+
+</header>
+
+<div class="certificate">
+
+<div class="title">
+
+🌟 شهادة تقدير 🌟
+
+</div>
+
+<p>
+
+تُمنح هذه الشهادة إلى
+
+</p>
+
+<div class="name" id="childName">
+
+الطفل
+
+</div>
+
+<div class="stars" id="points">
+
+⭐ 0 نجمة
+
+</div>
+
+<p>
+
+نهنئك على اجتهادك ومثابرتك في التعلم.
+
+استمر في التقدم، فأنت بطل حقيقي! 🎉
+
+</p>
+
+<button onclick="window.print()">
+
+🖨️ طباعة الشهادة
+
+</button>
+
+</div>
+
+<script>
+
+let nom = localStorage.getItem("اسم_الطفل") || "الطفل";
+
+let points = Number(localStorage.getItem("points") || 0);
+
+document.getElementById("childName").innerHTML = nom;
+
+document.getElementById("points").innerHTML =
+"⭐ " + points + " نجمة";
+
+</script>
+
+</body>
+
+</html>

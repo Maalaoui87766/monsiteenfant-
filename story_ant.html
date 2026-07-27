@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>قصة تفاعلية | أكاديمية الطفل الذكي</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.story-page{
+    text-align:center;
+    padding:20px;
+}
+
+.story-title{
+    background:#FF9800;
+    color:white;
+    padding:15px;
+    border-radius:20px;
+    font-size:30px;
+}
+
+.story-image{
+    width:90%;
+    max-width:350px;
+    border-radius:20px;
+    margin:20px;
+}
+
+.story-text{
+    background:#FFF8DC;
+    padding:20px;
+    border-radius:20px;
+    font-size:26px;
+    line-height:2;
+}
+
+button{
+    font-size:22px;
+    padding:12px 25px;
+    margin:10px;
+    border-radius:20px;
+    border:none;
+}
+
+.next{
+    background:#4CAF50;
+    color:white;
+}
+
+.back{
+    background:#2196F3;
+    color:white;
+}
+
+.progress{
+    margin:15px;
+    font-size:22px;
+    color:#555;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+📚 أكاديمية الطفل الذكي
+
+</header>
+
+
+
+<div class="story-page">
+
+
+<h1 class="story-title" id="title">
+🐜 النملة المجتهدة
+</h1>
+
+
+<div class="progress" id="page">
+الصفحة 1 من 4
+</div>
+
+
+<img id="image" class="story-image"
+src="images/stories/ant/1.png">
+
+
+
+<p id="text" class="story-text">
+
+كَانَتْ نَمْلَةٌ صَغِيرَةٌ تَعْمَلُ كُلَّ يَوْمٍ بِجِدٍّ وَنَشَاطٍ.
+
+</p>
+
+
+<button onclick="playSound()">
+🔊 استمع
+</button>
+
+
+<br>
+
+
+<button class="back" onclick="previous()">
+⬅️ السابق
+</button>
+
+
+<button class="next" onclick="next()">
+التالي ➡️
+</button><br>
+<a class="read" href="quiz_ant.html">
+
+📝 اختبر نفسك
+
+</a>
+
+</div>
+
+
+
+<script>
+
+
+let current=0;
+
+
+let pages=[
+
+{
+img:"images/stories/ant/1.png",
+text:"كَانَتْ نَمْلَةٌ صَغِيرَةٌ تَعْمَلُ كُلَّ يَوْمٍ بِجِدٍّ وَنَشَاطٍ.",
+sound:"sounds/stories/ant/1.mp3"
+},
+
+{
+img:"images/stories/ant/2.png",
+text:"جَمَعَتِ النَّمْلَةُ الْحُبُوبَ وَحَمَلَتْهَا إِلَى بَيْتِهَا.",
+sound:"sounds/stories/ant/2.mp3"
+},
+
+{
+img:"images/stories/ant/3.png",
+text:"جَاءَ الشِّتَاءُ وَكَانَ عِنْدَ النَّمْلَةِ طَعَامٌ كَافٍ.",
+sound:"sounds/stories/ant/3.mp3"
+},
+
+{
+img:"images/stories/ant/4.png",
+text:"الِاجْتِهَادُ وَالتَّخْطِيطُ سَبِيلُ النَّجَاحِ.",
+sound:"sounds/stories/ant/4.mp3"
+}
+
+];
+
+
+function showPage(){
+document.getElementById("image").src =
+pages[current].img + "?page=" + current;
+
+document.getElementById("text").innerHTML=pages[current].text;
+
+document.getElementById("page").innerHTML=
+"الصفحة "+(current+1)+" من "+pages.length;
+
+}
+
+
+
+function next(){
+
+if(current < pages.length-1){
+
+current++;
+
+showPage();
+
+}
+
+else{
+
+alert("🎉 أحسنت! أكملت القصة +20 نقطة");
+
+ajouterPoints(20);
+
+}
+
+}
+
+
+
+function previous(){
+
+if(current>0){
+
+current--;
+
+showPage();
+
+}
+
+}
+
+
+
+function playSound(){
+
+let audio=new Audio(pages[current].sound);
+
+audio.play();
+
+}
+
+
+
+function ajouterPoints(n){
+
+let points=localStorage.getItem("points") || 0;
+
+points=Number(points)+n;
+
+localStorage.setItem("points",points);
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

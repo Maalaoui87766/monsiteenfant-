@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تعلم الحروف العربية</title>
+
+<style>
+
+body{
+background:#FFF8DC;
+font-family:Tahoma;
+text-align:center;
+margin:0;
+}
+
+h1{
+background:#00A86B;
+color:white;
+padding:20px;
+margin:0;
+}
+
+.lettres{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+padding:20px;
+}
+
+.case{
+background:white;
+border-radius:15px;
+font-size:60px;
+padding:20px;
+cursor:pointer;
+box-shadow:0 0 10px gray;
+}
+
+.case:hover{
+background:#FFE066;
+}
+
+#nom{
+font-size:35px;
+color:red;
+margin:20px;
+}
+
+button{
+padding:15px 30px;
+font-size:20px;
+margin:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>تعلم الحروف العربية</h1>
+
+<div class="lettres">
+
+<div class="case" onclick="dire('أ')">أ</div>
+<div class="case" onclick="dire('ب')">ب</div>
+<div class="case" onclick="dire('ت')">ت</div>
+<div class="case" onclick="dire('ث')">ث</div>
+
+<div class="case" onclick="dire('ج')">ج</div>
+<div class="case" onclick="dire('ح')">ح</div>
+<div class="case" onclick="dire('خ')">خ</div>
+<div class="case" onclick="dire('د')">د</div>
+
+</div>
+
+<h2 id="nom"></h2>
+
+<button onclick="window.location='index.html'">
+العودة للرئيسية
+</button>
+
+<script>
+
+function dire(lettre){
+
+document.getElementById("nom").innerHTML="الحرف : "+lettre;
+
+let voix=new SpeechSynthesisUtterance(lettre);
+
+voix.lang="ar";
+
+speechSynthesis.speak(voix);
+
+}
+
+</script>
+
+</body>
+</html>

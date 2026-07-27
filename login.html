@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>دخول الطفل</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.login{
+background:white;
+margin:30px;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 10px #ccc;
+}
+
+input{
+
+padding:15px;
+font-size:20px;
+width:80%;
+text-align:center;
+border-radius:10px;
+border:1px solid #aaa;
+
+}
+
+.avatar{
+
+font-size:50px;
+cursor:pointer;
+margin:10px;
+
+}
+
+.selected{
+
+border:3px solid #4CAF50;
+border-radius:20px;
+
+}
+
+button{
+
+padding:15px 30px;
+font-size:20px;
+border-radius:15px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+🌟 مرحبًا بك يا بطل 🌟
+
+</header>
+
+<div class="login">
+
+<h2>
+اكتب اسمك
+</h2>
+
+<input id="name" placeholder="اسم الطفل">
+
+<h2>
+اختر شخصيتك
+</h2>
+
+<span class="avatar" onclick="choisir(this)">
+👦
+</span>
+
+
+<span class="avatar" onclick="choisir(this)">
+👧
+</span>
+
+<span class="avatar" onclick="choisir(this)">
+🧒
+</span>
+
+<br><br>
+
+<button onclick="entrer()">
+دخول 🚀
+</button>
+
+</div>
+
+<script>
+
+let avatar="👦";
+
+function choisir(el){
+
+document.querySelectorAll(".avatar").forEach(function(a){
+
+a.classList.remove("selected");
+
+});
+
+el.classList.add("selected");
+
+avatar=el.innerHTML;
+
+}
+
+function entrer(){
+
+let nom=document.getElementById("name").value.trim();
+
+if(nom==""){
+
+alert("اكتب اسم الطفل");
+
+return;
+
+}
+
+localStorage.setItem("اسم_الطفل",nom);
+
+localStorage.setItem("avatar",avatar);
+
+window.location.href="./dashboard.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

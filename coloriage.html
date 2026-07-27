@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الرسم والتلوين</title>
+
+<style>
+
+body{
+font-family:Tahoma;
+text-align:center;
+background:#FFF8DC;
+}
+
+h1{
+background:#FF5722;
+color:white;
+padding:20px;
+}
+
+canvas{
+background:white;
+border:3px solid black;
+border-radius:15px;
+}
+
+button{
+font-size:20px;
+padding:10px 20px;
+margin:10px;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🎨 ارسم ولون</h1>
+
+<canvas id="لوحة" width="320" height="320"></canvas>
+
+<br>
+
+<input type="color" id="لون">
+
+<button onclick="مسح()">🗑 مسح</button>
+
+
+<script>
+let canvas=document.getElementById("لوحة");
+let ctx=canvas.getContext("2d");
+
+let رسم=false;
+
+
+function مكاناللمس(e){
+
+let rect=canvas.getBoundingClientRect();
+
+return {
+x:e.touches[0].clientX-rect.left,
+y:e.touches[0].clientY-rect.top
+};
+
+}
+
+
+canvas.addEventListener("touchstart",function(e){
+
+رسم=true;
+
+let p=مكاناللمس(e);
+
+ctx.beginPath();
+
+ctx.moveTo(p.x,p.y);
+
+});
+
+
+canvas.addEventListener("touchmove",function(e){
+
+if(!رسم) return;
+
+e.preventDefault();
+
+let p=مكاناللمس(e);
+
+ctx.lineWidth=5;
+ctx.lineCap="round";
+
+ctx.strokeStyle=document.getElementById("لون").value;
+
+ctx.lineTo(p.x,p.y);
+
+ctx.stroke();
+
+ctx.beginPath();
+
+ctx.moveTo(p.x,p.y);
+
+},{passive:false});
+
+
+canvas.addEventListener("touchend",function(){
+
+رسم=false;
+
+});
+
+
+function مسح(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+}
+
+</script>
+
+</body>
+</html>

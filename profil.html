@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ملف الطفل</title>
+
+<style>
+
+body{
+font-family:Tahoma;
+text-align:center;
+background:#E3F2FD;
+}
+
+.box{
+background:white;
+margin:30px;
+padding:30px;
+border-radius:20px;
+box-shadow:0 0 10px gray;
+}
+
+input,button{
+
+font-size:20px;
+padding:10px;
+margin:10px;
+
+}
+
+button{
+
+background:#4CAF50;
+color:white;
+border:none;
+border-radius:10px;
+
+}
+
+#info{
+
+font-size:25px;
+color:#E91E63;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+<h1>👦 ملف الطفل</h1>
+
+<input id="اسم" placeholder="اكتب اسمك">
+
+<br>
+
+<button onclick="حفظ()">
+حفظ
+</button>
+
+<h2 id="info"></h2>
+
+<h2>
+⭐ النجوم:
+<span id="stars">0</span>
+</h2>
+
+</div>
+
+
+
+<script>
+
+
+function حفظ(){
+
+let اسم=document.getElementById("اسم").value;
+
+
+localStorage.setItem("اسم_الطفل",اسم);
+
+
+عرض();
+
+
+}
+
+
+function عرض(){
+
+let اسم=localStorage.getItem("اسم_الطفل");
+
+
+if(اسم){
+
+document.getElementById("info").innerHTML=
+"مرحبا "+اسم+" 🌟";
+
+}
+
+}
+
+
+function عرض(){
+
+let اسم=localStorage.getItem("اسم_الطفل");
+
+if(اسم){
+
+document.getElementById("info").innerHTML=
+"مرحبا "+اسم+" 🌟";
+
+}
+
+عرض_النجوم();
+
+}
+
+</script>
+
+
+</body>
+</html>

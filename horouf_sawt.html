@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الحروف مع الصوت</title>
+
+<style>
+
+body{
+font-family:Tahoma;
+background:#E8F5E9;
+text-align:center;
+}
+
+h1{
+background:#009688;
+color:white;
+padding:20px;
+}
+
+.card{
+
+background:white;
+margin:20px;
+padding:25px;
+border-radius:20px;
+font-size:40px;
+box-shadow:0 0 10px gray;
+
+}
+
+img{
+
+width:120px;
+height:120px;
+
+}
+
+button{
+
+font-size:25px;
+padding:10px 25px;
+border-radius:15px;
+background:#FFC107;
+border:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>🔤 الحروف العربية والصوت</h1>
+
+
+<div class="card">
+
+<div>أ</div>
+
+<img src="asad.png">
+
+<p>أسد 🦁</p>
+
+<button onclick="نطق('أ أسد')">
+🔊 اسمع
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<div>ب</div>
+
+<img src="batta.png">
+
+<p>بطة 🦆</p>
+
+<button onclick="نطق('ب بطة')">
+🔊 اسمع
+</button>
+
+</div>
+
+
+
+<script>
+
+function نطق(نص){
+
+let صوت=new SpeechSynthesisUtterance(نص);
+
+صوت.lang="ar-SA";
+
+speechSynthesis.speak(صوت);
+
+}
+
+</script>
+
+
+</body>
+</html>

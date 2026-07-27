@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>الجوائز</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+🏆 الجوائز
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>
+⭐ نجومك:
+<span id="stars">0</span>
+</h2>
+
+
+
+<h2 id="gift">
+
+</h2>
+
+<div class="progress">
+
+<div class="bar" id="rewardBar"></div>
+
+</div>
+
+<p id="nextReward"></p>
+
+<div class="grid">
+
+
+<div class="card">
+
+<h2>
+🥉 مبتدئ
+</h2>
+
+<p>
+10 نجوم
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+🥈 متعلم ذكي
+</h2>
+
+<p>
+50 نجمة
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+🥇 بطل صغير
+</h2>
+
+<p>
+100 نجمة
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>
+👑 عبقري المستقبل
+</h2>
+
+<p>
+200 نجمة
+</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<a class="back" href="home.html">
+
+⬅️ العودة للرئيسية
+
+</a><br>
+<a class="back" href="certificate.html">
+
+🏅 شهادة الإنجاز
+
+</a>
+
+
+<script>
+
+
+let points=Number(localStorage.getItem("points")) || 0;
+
+
+document.getElementById("stars").innerHTML=points;
+
+
+
+let gift=document.getElementById("gift");
+
+
+
+if(points>=200){
+
+gift.innerHTML="👑 أنت عبقري المستقبل!";
+
+}
+
+else if(points>=100){
+
+gift.innerHTML="🥇 أحسنت! حصلت على لقب البطل الصغير";
+
+}
+
+else if(points>=50){
+
+gift.innerHTML="🥈 تهانينا! أصبحت متعلماً ذكياً";
+
+}
+
+else if(points>=10){
+
+gift.innerHTML="🥉 بداية رائعة";
+
+}
+
+else{
+
+gift.innerHTML="🌟 ابدأ التعلم لتحصل على جوائز";
+
+}
+let percent = 0;
+let text = "";
+
+if (points < 10) {
+
+    percent = (points / 10) * 100;
+    text = "بقي " + (10 - points) + " نجوم للحصول على 🥉";
+
+} else if (points < 50) {
+
+    percent = ((points - 10) / 40) * 100;
+    text = "بقي " + (50 - points) + " نجمة للحصول على 🥈";
+
+} else if (points < 100) {
+
+    percent = ((points - 50) / 50) * 100;
+    text = "بقي " + (100 - points) + " نجمة للحصول على 🥇";
+
+} else if (points < 200) {
+
+    percent = ((points - 100) / 100) * 100;
+    text = "بقي " + (200 - points) + " نجمة للحصول على 👑";
+
+} else {
+
+    percent = 100;
+    text = "🎉 لقد حصلت على جميع الجوائز";
+
+}
+
+document.getElementById("rewardBar").style.width = percent + "%";
+document.getElementById("nextReward").innerHTML = text;
+
+</script>
+
+</body>
+
+</html>

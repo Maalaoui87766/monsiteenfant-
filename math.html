@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تعلم الرياضيات</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.operation{
+
+background:white;
+margin:20px;
+padding:20px;
+text-align:center;
+border-radius:20px;
+font-size:35px;
+box-shadow:0 0 10px #ccc;
+
+}
+
+input{
+
+width:120px;
+font-size:30px;
+text-align:center;
+padding:10px;
+margin-top:20px;
+
+}
+
+button{
+
+margin-top:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+➕ تعلم الجمع
+
+</header>
+
+<div class="operation">
+
+<div id="question">
+
+2 + 3 = ?
+
+</div>
+
+<input id="rep" type="number">
+
+<br>
+
+<button onclick="verifier()">
+
+تحقق
+
+</button>
+
+</div>
+
+<script>
+
+let a=2;
+let b=3;
+
+function verifier(){
+
+let r=Number(document.getElementById("rep").value);
+
+if(r==a+b){
+
+alert("🎉 أحسنت");
+
+ajouterPoints(10);
+
+}else{
+
+alert("❌ حاول مرة أخرى");
+
+}
+
+}
+
+</script>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

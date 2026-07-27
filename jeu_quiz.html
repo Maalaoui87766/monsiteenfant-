@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>لعبة الأسئلة</title>
+
+<style>
+
+body{
+font-family:Tahoma;
+background:#E3F2FD;
+text-align:center;
+}
+
+h1{
+background:#2196F3;
+color:white;
+padding:20px;
+}
+
+button{
+font-size:22px;
+padding:15px 25px;
+margin:8px;
+border-radius:15px;
+border:none;
+background:white;
+box-shadow:0 0 8px gray;
+}
+
+#نتيجة{
+font-size:25px;
+color:green;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<h1>🎮 اختبار الذكاء</h1>
+
+<h2 id="السؤال"></h2>
+
+<div id="الأجوبة"></div>
+
+<h2 id="نتيجة"></h2>
+
+<p>⭐ النقاط: <span id="نقاط">0</span></p>
+
+
+<script>
+
+let الأسئلة=[
+
+{
+س:"ما هو لون السماء؟",
+أ:["أزرق","أحمر","أخضر"],
+ص:"أزرق"
+},
+
+{
+س:"كم عدد أصابع اليد؟",
+أ:["3","5","10"],
+ص:"5"
+},
+
+{
+س:"أي حيوان يقول مياو؟",
+أ:["قط","كلب","حصان"],
+ص:"قط"
+},
+
+{
+س:"ما هو أول حرف في اللغة العربية؟",
+أ:["ب","أ","ت"],
+ص:"أ"
+}
+
+];
+
+
+let رقم=0;
+let نقاط=0;
+
+
+function عرض(){
+
+document.getElementById("السؤال").innerHTML=
+الأسئلة[رقم].س;
+
+
+let html="";
+
+
+الأسئلة[رقم].أ.forEach(function(جواب){
+
+html +=
+"<button onclick=\"تحقق('"+جواب+"')\">"+
+جواب+
+"</button>";
+
+});
+
+
+document.getElementById("الأجوبة").innerHTML=html;
+
+}
+
+
+
+function تحقق(جواب){
+
+
+if(جواب==الأسئلة[رقم].ص){
+
+نقاط+=10;
+
+document.getElementById("نتيجة").innerHTML=
+"🎉 أحسنت إجابة صحيحة";
+
+}else{
+
+document.getElementById("نتيجة").innerHTML=
+"❌ حاول مرة أخرى";
+
+}
+
+
+document.getElementById("نقاط").innerHTML=نقاط;
+
+
+رقم++;
+
+
+if(رقم<الأسئلة.length){
+
+setTimeout(عرض,1000);
+
+}else{
+
+document.getElementById("السؤال").innerHTML=
+"🏆 انتهت اللعبة";
+
+document.getElementById("الأجوبة").innerHTML=
+"مجموع النقاط: "+نقاط;
+
+}
+
+}
+
+
+عرض();
+
+</script>
+
+</body>
+</html>

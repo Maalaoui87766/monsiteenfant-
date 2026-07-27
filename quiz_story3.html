@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>اختبار الغراب الذكي</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.question{
+
+background:white;
+margin:20px;
+padding:20px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 0 10px #ccc;
+
+}
+
+button{
+
+display:block;
+width:90%;
+margin:10px auto;
+padding:15px;
+font-size:20px;
+border-radius:15px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+❓ اختبار الغراب الذكي
+
+</header>
+
+
+<div class="question">
+
+
+<h2>
+كيف استطاع الغراب الوصول إلى الماء؟
+</h2>
+
+
+<button onclick="faux()">
+🐦 طار بعيدًا
+</button>
+
+
+<button onclick="vrai()">
+🪨 وضع الحجارة في الإناء
+</button>
+
+
+<button onclick="faux()">
+💧 كسر الإناء
+</button>
+
+
+<button onclick="faux()">
+🌳 نام تحت الشجرة
+</button>
+
+
+</div>
+
+
+<script src="js/app.js"></script>
+
+
+<script>
+
+
+function vrai(){
+
+ajouterPoints(20);
+
+alert("🎉 أحسنت! إجابة صحيحة.");
+
+window.location.href="stories.html";
+
+}
+
+
+function faux(){
+
+alert("❌ حاول مرة أخرى.");
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

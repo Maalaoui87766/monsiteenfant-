@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>التلوين للأطفال | أكاديمية الطفل الذكي</title>
+
+<meta name="description" content="لعبة تلوين للأطفال باستخدام الرسم والألوان">
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.paint-area{
+
+text-align:center;
+padding:15px;
+
+}
+
+canvas{
+
+background:white;
+border:3px solid #333;
+border-radius:15px;
+
+}
+
+input,button{
+
+font-size:18px;
+padding:10px;
+margin:10px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+🎨 التلوين
+
+</header>
+
+
+
+<div class="paint-area">
+
+
+<h2>
+🦋 لوّن الفراشة
+</h2>
+
+
+
+<canvas id="لوحة" width="320" height="320"></canvas>
+
+
+<br>
+
+
+<input type="color" id="لون" value="#ff0000">
+
+
+<button onclick="مسح()">
+
+🗑️ مسح
+
+</button>
+<button onclick="انهاءالتلوين()">
+
+⭐ أنهيت التلوين
+
+</button>
+
+</div>
+
+
+
+<a class="back" href="lessons.html">
+
+⬅️ العودة إلى الدروس
+
+</a>
+
+
+
+<footer>
+
+⭐ تعلم والعب ⭐
+
+</footer>
+
+
+
+<script>
+let canvas=document.getElementById("لوحة");
+
+let ctx=canvas.getContext("2d");
+
+let رسم=false;
+
+
+
+function رسمالفراشة(){
+
+ctx.clearRect(0,0,320,320);
+
+
+ctx.beginPath();
+
+ctx.arc(100,150,50,0,Math.PI*2);
+
+ctx.arc(220,150,50,0,Math.PI*2);
+
+ctx.moveTo(160,100);
+
+ctx.lineTo(160,220);
+
+ctx.stroke();
+
+
+}
+
+
+
+رسمالفراشة();
+
+
+
+
+
+function ابدأ(){
+
+رسم=true;
+
+}
+
+
+
+function توقف(){
+
+رسم=false;
+
+}
+
+
+
+function ارسم(e){
+
+
+if(!رسم)return;
+
+
+let rect=canvas.getBoundingClientRect();
+
+
+let x;
+let y;
+
+
+
+if(e.touches){
+
+x=e.touches[0].clientX-rect.left;
+
+y=e.touches[0].clientY-rect.top;
+
+}
+
+else{
+
+x=e.clientX-rect.left;
+
+y=e.clientY-rect.top;
+
+}
+
+
+
+ctx.fillStyle=document.getElementById("لون").value;
+
+
+ctx.beginPath();
+
+ctx.arc(x,y,10,0,Math.PI*2);
+
+ctx.fill();
+
+
+}
+
+
+
+canvas.addEventListener("touchstart",ابدأ);
+
+canvas.addEventListener("touchmove",ارسم);
+
+canvas.addEventListener("touchend",توقف);
+
+
+
+canvas.addEventListener("mousedown",ابدأ);
+
+canvas.addEventListener("mousemove",ارسم);
+
+canvas.addEventListener("mouseup",توقف);
+
+
+
+
+
+function مسح(){
+
+رسمالفراشة();
+
+}function انهاءالتلوين(){
+
+if(localStorage.getItem("color_done")=="yes"){
+
+alert("✅ لقد حصلت على مكافأة التلوين من قبل");
+
+return;
+
+}
+
+
+let points = Number(localStorage.getItem("points")) || 0;
+
+points += 5;
+
+localStorage.setItem("points", points);
+
+
+localStorage.setItem("color_done","yes");
+
+
+alert("🎉 أحسنت! حصلت على ⭐ 5 نقاط");
+
+}
+
+</script>
+
+
+</body>
+
+</html>

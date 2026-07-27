@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ملف الطفل</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+👦 ملف الطفل
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>
+🌟 مرحباً يا بطل
+</h2>
+
+
+<h3>
+الاسم:
+<input id="name" placeholder="اكتب اسمك">
+</h3>
+
+
+<button onclick="saveName()">
+💾 حفظ
+</button>
+
+
+<hr>
+
+
+<h2>
+⭐ النجوم:
+<span id="stars">0</span>
+</h2>
+
+
+<h2>
+🏆 المستوى:
+<span id="level">1</span>
+</h2>
+
+
+
+<div class="progress">
+
+<div class="bar" id="bar"></div>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+📚 تقدم القصص
+</h2>
+
+<p id="storiesProgress"></p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>
+🏅 الجوائز
+</h2>
+
+<p id="medals"></p>
+
+</div>
+
+
+
+
+</div>
+
+
+
+<a class="back" href="home.html">
+
+⬅️ العودة للرئيسية
+
+</a>
+
+
+
+
+<script>
+
+
+function loadData(){
+
+
+let name=localStorage.getItem("childName");
+
+
+if(name){
+
+document.getElementById("name").value=name;
+
+}
+
+
+
+let points=localStorage.getItem("points") || 0;
+
+
+
+document.getElementById("stars").innerHTML=points;
+
+
+
+let level=Math.floor(points/50)+1;
+
+
+
+document.getElementById("level").innerHTML=level;
+
+
+
+let percent=(points%50)*2;
+
+
+
+document.getElementById("bar").style.width=percent+"%";
+
+
+}
+
+
+
+
+function saveName(){
+
+
+let name=document.getElementById("name").value;
+
+
+localStorage.setItem("childName",name);
+
+
+alert("تم حفظ الاسم ⭐");
+
+
+}
+
+
+
+
+
+function loadStories(){
+
+
+let tests=[
+
+["🐰 الأرنب الصغير","quiz_rabbit_done"],
+
+["🐜 النملة المجتهدة","quiz_ant_done"],
+
+["🦊 الثعلب والغراب","quiz_fox_done"],
+
+["🐦 العصفور الصغير","quiz_bird_done"],
+
+["🌳 الشجرة الطيبة","quiz_tree_done"]
+
+];
+
+
+
+let html="";
+
+let count=0;
+
+
+
+tests.forEach(function(test){
+
+
+if(localStorage.getItem(test[1])=="yes"){
+
+
+html += test[0]+" ✅<br>";
+
+count++;
+
+
+}
+
+else{
+
+
+html += test[0]+" ⏳<br>";
+
+
+}
+
+
+});
+
+
+
+html += "<br>📖 الاختبارات المكتملة: "+count+" / 5";
+
+
+
+document.getElementById("storiesProgress").innerHTML=html;
+
+
+}
+
+
+
+
+
+function loadMedals(){
+
+
+let points=localStorage.getItem("points") || 0;
+
+
+let html="";
+
+
+
+if(points>=500){
+
+
+html+="🥇 الميدالية الذهبية<br>";
+
+
+}
+
+else if(points>=300){
+
+
+html+="🥈 الميدالية الفضية<br>";
+
+
+}
+
+else if(points>=100){
+
+
+html+="🥉 الميدالية البرونزية<br>";
+
+
+}
+
+else{
+
+
+html+="🎯 واصل التعلم للحصول على أول ميدالية";
+
+
+}
+
+
+
+document.getElementById("medals").innerHTML=html;
+
+
+}
+
+
+
+
+loadData();
+
+loadStories();
+
+loadMedals();
+
+
+</script>
+
+
+</body>
+
+</html>

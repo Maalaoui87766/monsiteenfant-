@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مستويات التعلم</title>
+
+<style>
+
+body{
+font-family:Tahoma;
+background:#FFF8DC;
+text-align:center;
+}
+
+h1{
+background:#4CAF50;
+color:white;
+padding:20px;
+}
+
+button{
+display:block;
+margin:20px auto;
+width:250px;
+padding:20px;
+font-size:25px;
+border-radius:20px;
+border:none;
+color:white;
+}
+
+.s1{
+background:#4CAF50;
+}
+
+.s2{
+background:#FF9800;
+}
+
+.s3{
+background:#F44336;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>🏆 اختر المستوى</h1>
+
+
+<button class="s1" onclick="ouvrir(1)">
+🟢 المستوى السهل
+</button>
+
+<button class="s2" onclick="ouvrir(2)">
+🟡 المستوى المتوسط 🔓
+</button>
+
+
+<button class="s3" onclick="ouvrir(3)">
+🔴 المستوى الصعب
+</button>
+
+
+
+<script>
+if(localStorage.getItem("niveau2")!="ouvert"){
+
+document.querySelector(".s2").disabled=true;
+
+}
+function ouvrir(n){
+
+if(n==1){
+
+location.href="quiz_facile.html";
+
+}
+
+if(n==2){
+
+location.href="quiz_moyen.html";
+
+}
+
+if(n==3){
+
+location.href="quiz_difficile.html";
+
+}
+
+}
+
+</script>
+
+
+</body>
+</html>

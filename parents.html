@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>قسم الوالدين</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+👨‍👩‍👦 قسم الوالدين
+
+</header>
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+
+<h2>
+🌟 متابعة تعلم الطفل
+</h2>
+
+
+<h3>
+👦 اسم الطفل:
+<span id="childName">-</span>
+</h3>
+
+
+<h3>
+⭐ مجموع النجوم:
+<span id="stars">0</span>
+</h3>
+
+
+<h3>
+🏆 المستوى:
+<span id="level">1</span>
+</h3>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+📚 تقدم القصص
+</h2>
+
+
+<p id="tests"></p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+💡 نصائح للوالدين
+</h2>
+
+
+<p>
+✅ شجع طفلك على التعلم يومياً.
+</p>
+
+
+<p>
+✅ اجعل وقت التعلم ممتعاً وقصيراً.
+</p>
+
+
+<p>
+✅ استخدم المكافآت لتحفيز الطفل.
+</p>
+
+
+<p>
+✅ تابع تقدمه دون ضغط.
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+📚 محتوى الأكاديمية
+</h2>
+
+
+<p>
+تقدم الأكاديمية:
+</p>
+
+
+<p>
+🔤 الحروف - 🔢 الأرقام - 📖 القصص - 🎮 الألعاب - 🎨 التلوين
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<a class="back" href="home.html">
+
+⬅️ العودة للرئيسية
+
+</a>
+
+
+
+
+
+<script>
+
+
+let name = localStorage.getItem("childName") || "-";
+
+document.getElementById("childName").innerHTML=name;
+
+
+
+let points = localStorage.getItem("points") || 0;
+
+
+document.getElementById("stars").innerHTML=points;
+
+
+
+let level = Math.floor(points/50)+1;
+
+
+document.getElementById("level").innerHTML=level;
+
+
+
+
+
+let quizzes=[
+
+"quiz_rabbit_done",
+
+"quiz_ant_done",
+
+"quiz_fox_done",
+
+"quiz_bird_done",
+
+"quiz_tree_done"
+
+];
+
+
+let count=0;
+
+
+quizzes.forEach(function(q){
+
+
+if(localStorage.getItem(q)=="yes"){
+
+count++;
+
+}
+
+
+});
+
+
+
+document.getElementById("tests").innerHTML=
+
+"✅ الاختبارات المكتملة: "+count+" / 5";
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

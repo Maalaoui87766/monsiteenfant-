@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🎧 اسمع واختر</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header>
+
+🎧 لعبة اسمع واختر
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2>
+
+اضغط على السماعة ثم اختر الصورة الصحيحة
+
+</h2>
+
+<button onclick="jouer('sounds/pomme.mp3')">
+
+🔊 استمع
+
+</button>
+
+<br><br>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="images/fruits/pomme.png" alt="تفاحة">
+
+<button onclick="verifier('pomme')">
+
+🍎 اختيار
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<img src="images/fruits/banane.png" alt="موز">
+
+<button onclick="verifier('banane')">
+
+🍌 اختيار
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<img src="images/fruits/orange.png" alt="برتقال">
+
+<button onclick="verifier('orange')">
+
+🍊 اختيار
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<img src="images/fruits/fraise.png" alt="فراولة">
+
+<button onclick="verifier('fraise')">
+
+🍓 اختيار
+
+</button>
+
+</div>
+
+</div>
+
+<h2 id="resultat"></h2>
+
+</div>
+
+</div>
+
+<a class="back" href="home.html">
+
+⬅️ العودة للرئيسية
+
+</a>
+
+<script src="js/app.js"></script>
+
+<script>
+
+function verifier(reponse){
+
+let resultat=document.getElementById("resultat");
+
+if(reponse=="pomme"){
+
+resultat.innerHTML="🎉 أحسنت ⭐";
+
+ajouterPoints(10);
+
+}
+else{
+
+resultat.innerHTML="❌ حاول مرة أخرى";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

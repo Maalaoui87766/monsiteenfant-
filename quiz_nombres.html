@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>اختبار الأرقام</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+🔢 اختبار الأرقام
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2 id="question"></h2>
+
+
+<div id="answers"></div>
+
+
+<h3 id="result"></h3>
+
+
+<h3>
+⭐ النقاط: <span id="score">0</span>
+</h3>
+
+
+</div>
+
+
+</div>
+
+
+
+<a class="back" href="lessons.html">
+
+⬅️ العودة إلى الدروس
+
+</a>
+
+
+
+<script>
+
+
+let questions=[
+
+{
+q:"كم عدد التفاحات؟ 🍎🍎",
+a:["1","2","3"],
+correct:"2"
+},
+
+{
+q:"كم عدد النجوم؟ ⭐⭐⭐",
+a:["2","3","4"],
+correct:"3"
+},
+
+{
+q:"ما هو الرقم بعد 3؟",
+a:["2","4","5"],
+correct:"4"
+},
+
+{
+q:"ما هو الرقم 5؟",
+a:["٥","٢","٨"],
+correct:"٥"
+},
+
+{
+q:"كم عدد الأصابع في اليد؟ ✋",
+a:["3","5","10"],
+correct:"5"
+}
+
+];
+
+
+let index=0;
+
+let score=0;
+
+
+
+function showQuestion(){
+
+
+let q=questions[index];
+
+
+document.getElementById("question").innerHTML=q.q;
+
+
+let box=document.getElementById("answers");
+
+box.innerHTML="";
+
+
+q.a.forEach(function(x){
+
+
+let btn=document.createElement("button");
+
+btn.innerHTML=x;
+
+
+btn.onclick=function(){
+
+check(x);
+
+};
+
+
+box.appendChild(btn);
+
+
+});
+
+
+}
+
+
+
+function check(answer){
+
+
+if(index >= questions.length){
+return;
+}
+
+
+let result=document.getElementById("result");
+
+
+if(answer==questions[index].correct){
+
+score+=10;
+
+result.innerHTML="🎉 إجابة صحيحة ⭐";
+
+}
+
+else{
+
+result.innerHTML="❌ حاول مرة أخرى";
+
+}
+
+
+
+document.getElementById("score").innerHTML=score;
+
+
+index++;
+
+
+if(index < questions.length){
+
+setTimeout(showQuestion,1000);
+
+}
+
+else{
+
+setTimeout(function(){
+
+result.innerHTML="🏆 انتهى الاختبار نتيجتك: "+score;
+
+},1000);
+
+}
+
+
+}
+
+
+showQuestion();
+
+
+</script>
+
+
+
+</body>
+
+</html>
