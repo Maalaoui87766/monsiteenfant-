@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🧮 المعداد الذكي</title>
+
+<style>
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Tahoma, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top, #162b55 0%, #08152e 45%, #050d1d 100%);
+  color: white;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+  max-width: 1250px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.header h1 {
+  color: #ffd54a;
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.header p {
+  color: #d8e5ff;
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   SMART LAB
+========================================================= */
+
+.smart-lab {
+  max-width: 1250px;
+  margin: 25px auto;
+  padding: 22px;
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18, 35, 70, 0.97),
+      rgba(8, 20, 45, 0.97)
+    );
+
+  border: 1px solid rgba(255, 210, 80, 0.25);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.smart-lab-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.smart-lab-header h2 {
+  margin: 8px 0;
+  color: #ffd54a;
+  font-size: 28px;
+}
+
+.smart-lab-header p {
+  margin: 0;
+  color: #dce7ff;
+  font-size: 16px;
+}
+
+.lab-badge {
+  display: inline-block;
+  padding: 7px 16px;
+  border-radius: 20px;
+  background: rgba(255, 213, 74, 0.12);
+  border: 1px solid rgba(255, 213, 74, 0.3);
+  color: #ffd54a;
+  font-weight: bold;
+}
+
+
+/* =========================================================
+   ABACUS + OPERATION
+========================================================= */
+
+.smart-lab-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(300px, 0.65fr);
+
+  gap: 20px;
+  align-items: stretch;
+}
+
+.abacus-side,
+.operation-side {
+  border-radius: 24px;
+  padding: 18px;
+
+  background: rgba(0, 0, 0, 0.16);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.operation-side {
+  display: flex;
+  align-items: center;
+}
+
+
+/* =========================================================
+   CURRENT NUMBER
+========================================================= */
+
+.number-box {
+  max-width: 850px;
+  margin: 0 auto 15px;
+
+  padding: 15px;
+
+  text-align: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.03)
+    );
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.number-box .title {
+  color: #cbd9f5;
+  font-size: 15px;
+}
+
+#resultNumber {
+  margin-top: 5px;
+
+  color: #ffd54a;
+
+  font-size: 44px;
+  font-weight: bold;
+
+  direction: ltr;
+}
+
+
+/* =========================================================
+   PLACE VALUES
+========================================================= */
+
+.place-values {
+  max-width: 850px;
+  margin: 0 auto 15px;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 7px;
+}
+
+.place {
+  padding: 8px 4px;
+
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.05);
+
+  text-align: center;
+
+  font-size: 12px;
+}
+
+.place strong {
+  display: block;
+  margin-top: 4px;
+
+  color: #ffd54a;
+
+  font-size: 17px;
+
+  direction: ltr;
+}
+
+
+/* =========================================================
+   ABACUS
+========================================================= */
+
+.abacus-wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.abacus {
+  position: relative;
+
+  width: 100%;
+  height: 500px;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #d8954c,
+      #9b5925 45%,
+      #713c17
+    );
+
+  border: 8px solid #683b16;
+
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,0.12),
+    inset 0 0 35px rgba(0,0,0,0.35),
+    0 12px 30px rgba(0,0,0,0.35);
+
+  direction: ltr;
+}
+
+
+/* =========================================================
+   COLUMNS
+========================================================= */
+
+.columns {
+  position: absolute;
+
+  left: 20px;
+  right: 20px;
+  top: 18px;
+  bottom: 18px;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 8px;
+
+  direction: ltr;
+}
+
+
+/* =========================================================
+   COLUMN
+========================================================= */
+
+.column {
+  position: relative;
+  height: 100%;
+}
+
+
+/* =========================================================
+   ROD
+========================================================= */
+
+.rod {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+  bottom: 0;
+
+  width: 7px;
+
+  transform: translateX(-50%);
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      to right,
+      #777,
+      #e6e6e6,
+      #777
+    );
+
+  box-shadow:
+    0 0 5px rgba(0,0,0,0.5);
+}
+
+
+/* =========================================================
+   BEADS
+========================================================= */
+
+.bead {
+  position: absolute;
+
+  left: 50%;
+
+  width: 56px;
+  height: 40px;
+
+  transform: translateX(-50%);
+
+  border-radius: 14px;
+
+  border: 3px solid rgba(80,40,10,0.45);
+
+  transition:
+    top 0.15s cubic-bezier(.25,.8,.25,1);
+
+  z-index: 20;
+
+  user-select: none;
+}
+
+
+/* lower beads */
+
+.lower-bead {
+  background:
+    linear-gradient(
+      145deg,
+      #4ea4ff,
+      #1267c7 55%,
+      #07438b
+    );
+
+  box-shadow:
+    inset 0 4px 7px rgba(255,255,255,0.28),
+    inset 0 -5px 8px rgba(0,0,0,0.25),
+    0 5px 8px rgba(0,0,0,0.3);
+}
+
+
+/* top bead = 5 */
+
+.top-bead {
+  width: 60px;
+  height: 44px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ff5c5c,
+      #c51f2a 55%,
+      #7c1018
+    );
+
+  box-shadow:
+    inset 0 4px 7px rgba(255,255,255,0.3),
+    inset 0 -5px 8px rgba(0,0,0,0.25),
+    0 5px 8px rgba(0,0,0,0.3);
+
+  z-index: 30;
+}
+
+
+/* =========================================================
+   BEAM
+========================================================= */
+
+.beam {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 47%;
+
+  height: 30px;
+
+  border-radius: 7px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #e3a154,
+      #8b4d1d,
+      #66330f
+    );
+
+  border: 3px solid #683b16;
+
+  box-shadow:
+    0 5px 8px rgba(0,0,0,0.35);
+
+  z-index: 40;
+}
+
+
+/* =========================================================
+   COLUMN LABELS
+========================================================= */
+
+.column-labels {
+  max-width: 850px;
+  margin: 12px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  text-align: center;
+
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.column-labels div:nth-child(1) {
+  color: #ff9f43;
+}
+
+.column-labels div:nth-child(2) {
+  color: #b48cff;
+}
+
+.column-labels div:nth-child(3) {
+  color: #65d68a;
+}
+
+.column-labels div:nth-child(4) {
+  color: #ffd54a;
+}
+
+.column-labels div:nth-child(5) {
+  color: #58aaff;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttons {
+  max-width: 850px;
+
+  margin: 18px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+}
+
+.main-button {
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  transition: transform 0.15s;
+}
+
+.main-button:active {
+  transform: scale(0.97);
+}
+
+.speak-button {
+  background: #1677d2;
+  color: white;
+}
+
+.reset-button {
+  background: #ffd54a;
+  color: #17213d;
+}
+
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.legend {
+  max-width: 850px;
+
+  margin: 15px auto 0;
+
+  padding: 13px;
+
+  border-radius: 15px;
+
+  background: rgba(255,255,255,0.05);
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  flex-wrap: wrap;
+
+  font-size: 14px;
+}
+
+.legend-red {
+  color: #ff5c5c;
+}
+
+.legend-blue {
+  color: #58aaff;
+}
+
+
+/* =========================================================
+   OPERATION
+========================================================= */
+
+.operation-card {
+  width: 100%;
+  text-align: center;
+}
+
+.operation-card h3 {
+  margin-top: 0;
+
+  color: #ffd54a;
+
+  font-size: 25px;
+}
+
+.operation-subtitle {
+  color: #d7e2ff;
+
+  margin-bottom: 18px;
+}
+
+.operation-expression {
+  padding: 18px 10px;
+
+  margin: 15px 0;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.06);
+
+  border: 1px solid rgba(255,213,74,0.2);
+
+  font-size: 38px;
+
+  font-weight: bold;
+
+  color: white;
+
+  direction: ltr;
+}
+
+.operation-input {
+  width: 100%;
+
+  padding: 15px;
+
+  border-radius: 14px;
+
+  border: 2px solid rgba(255,213,74,0.35);
+
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+
+  text-align: center;
+
+  font-size: 25px;
+
+  outline: none;
+}
+
+.operation-input:focus {
+  border-color: #ffd54a;
+
+  box-shadow:
+    0 0 15px rgba(255,213,74,0.15);
+}
+
+.operation-check {
+  width: 100%;
+
+  margin-top: 12px;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #ffd54a;
+
+  color: #17213d;
+
+  font-size: 18px;
+
+  font-weight: bold;
+}
+
+.operation-check:active {
+  transform: scale(0.98);
+}
+
+.operation-result {
+  min-height: 54px;
+
+  margin-top: 15px;
+
+  padding: 12px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.05);
+
+  color: #fff;
+
+  font-size: 17px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+.operation-score {
+  margin-top: 14px;
+
+  color: #ffd54a;
+
+  font-weight: bold;
+
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   LEARNING
+========================================================= */
+
+.learning-section {
+  max-width: 1000px;
+
+  margin: 25px auto;
+
+  padding: 22px;
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(24,48,88,0.96),
+      rgba(8,20,43,0.96)
+    );
+
+  border:
+    1px solid rgba(88,170,255,0.2);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.3);
+
+  text-align: center;
+}
+
+.learning-section h2 {
+  color: #58aaff;
+
+  font-size: 27px;
+}
+
+.learning-number {
+  font-size: 38px;
+
+  color: #ffd54a;
+
+  font-weight: bold;
+
+  margin: 10px;
+}
+
+.learning-equation {
+  display: inline-block;
+
+  padding: 13px 25px;
+
+  border-radius: 15px;
+
+  background: rgba(255,255,255,0.06);
+
+  color: white;
+
+  font-size: 30px;
+
+  font-weight: bold;
+
+  direction: ltr;
+}
+
+.learning-step {
+  margin: 18px auto;
+
+  padding: 18px;
+
+  max-width: 700px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.05);
+
+  color: #e5edff;
+
+  font-size: 18px;
+
+  line-height: 1.8;
+}
+
+.learning-message {
+  min-height: 50px;
+
+  margin: 12px auto;
+
+  max-width: 700px;
+
+  padding: 12px;
+
+  border-radius: 14px;
+
+  background: rgba(88,170,255,0.08);
+
+  color: #8fc9ff;
+}
+
+.learning-progress {
+  max-width: 700px;
+
+  height: 10px;
+
+  margin: 15px auto;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.08);
+
+  overflow: hidden;
+}
+
+.learning-progress-bar {
+  height: 100%;
+
+  width: 25%;
+
+  border-radius: 20px;
+
+  background: #58aaff;
+
+  transition: width 0.3s;
+}
+
+.learning-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  margin-top: 15px;
+}
+
+.learning-button {
+  padding: 12px 22px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background: #1677d2;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+}
+
+.learning-button.secondary {
+  background: rgba(255,255,255,0.08);
+}
+
+.learning-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LEARNING HIGHLIGHT
+========================================================= */
+
+.learning-highlight {
+  filter:
+    drop-shadow(0 0 8px rgba(255,213,74,0.85));
+
+  animation: learningPulse 0.9s infinite alternate;
+}
+
+@keyframes learningPulse {
+  from {
+    opacity: 0.75;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .smart-lab {
+    margin: 15px 0;
+    padding: 14px;
+    border-radius: 22px;
+  }
+
+  .smart-lab-header h2 {
+    font-size: 23px;
+  }
+
+  .smart-lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .abacus-side,
+  .operation-side {
+    padding: 12px;
+  }
+
+  .operation-expression {
+    font-size: 32px;
+  }
+
+  .abacus {
+    height: 500px;
+  }
+
+  .bead {
+    width: 46px;
+    height: 34px;
+  }
+
+  .top-bead {
+    width: 49px;
+    height: 36px;
+  }
+
+  .beam {
+    height: 25px;
+  }
+
+  .place {
+    font-size: 10px;
+  }
+
+  .place strong {
+    font-size: 15px;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .header h1 {
+    font-size: 27px;
+  }
+
+  .smart-lab {
+    padding: 10px;
+  }
+
+  .smart-lab-header h2 {
+    font-size: 21px;
+  }
+
+  .smart-lab-header p {
+    font-size: 14px;
+  }
+
+  .number-box {
+    padding: 10px;
+  }
+
+  #resultNumber {
+    font-size: 38px;
+  }
+
+  .place-values {
+    gap: 3px;
+  }
+
+  .place {
+    padding: 7px 2px;
+  }
+
+  .place strong {
+    font-size: 13px;
+  }
+
+  .abacus {
+    height: 500px;
+  }
+
+  .columns {
+    left: 12px;
+    right: 12px;
+  }
+
+  .bead {
+    width: 40px;
+    height: 32px;
+  }
+
+  .top-bead {
+    width: 43px;
+    height: 34px;
+  }
+
+  .operation-expression {
+    font-size: 28px;
+    padding: 14px;
+  }
+
+  .operation-input {
+    font-size: 22px;
+  }
+
+  .buttons {
+    gap: 7px;
+  }
+
+  .main-button {
+    font-size: 15px;
+    padding: 12px 5px;
+  }
+
+  .column-labels {
+    font-size: 10px;
+  }
+
+  .legend {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .learning-section {
+    padding: 14px;
+  }
+
+  .learning-equation {
+    font-size: 25px;
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+  <h1>🧮 المعداد الذكي</h1>
+
+  <p>
+    تعلّم الأعداد والحساب بطريقة تفاعلية وممتعة
+  </p>
+
+</header>
+
+
+
+<!-- =====================================================
+     SMART LAB
+===================================================== -->
+
+<section class="smart-lab">
+
+
+  <div class="smart-lab-header">
+
+    <span class="lab-badge">
+      🧮 تدريب تفاعلي
+    </span>
+
+    <h2>
+      مختبر المعداد
+    </h2>
+
+    <p>
+      حرّك الخرز وشاهد العدد، ثم حل العملية الحسابية.
+    </p>
+
+  </div>
+
+
+
+  <div class="smart-lab-grid">
+
+
+    <!-- =================================================
+         ABACUS SIDE
+    ================================================== -->
+
+    <div class="abacus-side">
+
+
+      <!-- CURRENT NUMBER -->
+
+      <div class="number-box">
+
+        <div class="title">
+          العدد الحالي
+        </div>
+
+        <div id="resultNumber">
+          0
+        </div>
+
+      </div>
+
+
+
+      <!-- PLACE VALUES -->
+
+      <div class="place-values">
+
+        <div class="place">
+          عشرات الآلاف
+          <strong id="tenThousands">
+            0
+          </strong>
+        </div>
+
+        <div class="place">
+          الآلاف
+          <strong id="thousands">
+            0
+          </strong>
+        </div>
+
+        <div class="place">
+          المئات
+          <strong id="hundreds">
+            0
+          </strong>
+        </div>
+
+        <div class="place">
+          العشرات
+          <strong id="tens">
+            0
+          </strong>
+        </div>
+
+        <div class="place">
+          الآحاد
+          <strong id="ones">
+            0
+          </strong>
+        </div>
+
+      </div>
+
+
+
+      <!-- =================================================
+           ABACUS
+      ================================================== -->
+
+      <div class="abacus-wrapper">
+
+        <div class="abacus" id="abacus">
+
+          <div class="columns">
+
+
+            <!-- COLUMN 10000 -->
+
+            <div
+              class="column"
+              data-index="0"
+              data-place="10000">
+
+              <div class="rod"></div>
+
+              <div
+                class="bead top-bead"
+                data-type="top">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="0">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="1">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="2">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="3">
+              </div>
+
+            </div>
+
+
+
+            <!-- COLUMN 1000 -->
+
+            <div
+              class="column"
+              data-index="1"
+              data-place="1000">
+
+              <div class="rod"></div>
+
+              <div
+                class="bead top-bead"
+                data-type="top">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="0">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="1">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="2">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="3">
+              </div>
+
+            </div>
+
+
+
+            <!-- COLUMN 100 -->
+
+            <div
+              class="column"
+              data-index="2"
+              data-place="100">
+
+              <div class="rod"></div>
+
+              <div
+                class="bead top-bead"
+                data-type="top">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="0">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="1">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="2">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="3">
+              </div>
+
+            </div>
+
+
+
+            <!-- COLUMN 10 -->
+
+            <div
+              class="column"
+              data-index="3"
+              data-place="10">
+
+              <div class="rod"></div>
+
+              <div
+                class="bead top-bead"
+                data-type="top">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="0">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="1">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="2">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="3">
+              </div>
+
+            </div>
+
+
+
+            <!-- COLUMN 1 -->
+
+            <div
+              class="column"
+              data-index="4"
+              data-place="1">
+
+              <div class="rod"></div>
+
+              <div
+                class="bead top-bead"
+                data-type="top">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="0">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="1">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="2">
+              </div>
+
+              <div
+                class="bead lower-bead"
+                data-type="lower"
+                data-index="3">
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+          <!-- BEAM -->
+
+          <div class="beam"></div>
+
+        </div>
+
+
+        <!-- COLUMN LABELS -->
+
+        <div class="column-labels">
+
+          <div>عشرات الآلاف</div>
+          <div>الآلاف</div>
+          <div>المئات</div>
+          <div>العشرات</div>
+          <div>الآحاد</div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- BUTTONS -->
+
+      <div class="buttons">
+
+        <button
+          class="main-button speak-button"
+          id="speakButton">
+
+          🔊 نطق العدد
+
+        </button>
+
+        <button
+          class="main-button reset-button"
+          id="resetButton">
+
+          🔄 تصفير
+
+        </button>
+
+      </div>
+
+
+
+      <!-- LEGEND -->
+
+      <div class="legend">
+
+        <span class="legend-red">
+          🔴 الخرزة العلوية = 5
+        </span>
+
+        <span>
+          |
+        </span>
+
+        <span class="legend-blue">
+          🔵 كل خرزة سفلية = 1
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         OPERATION SIDE
+    ================================================== -->
+
+    <div class="operation-side">
+
+
+      <div class="operation-card">
+
+        <h3>
+          🎯 العملية
+        </h3>
+
+        <p class="operation-subtitle">
+          استعمل المعداد ثم اكتب النتيجة
+        </p>
+
+
+        <div
+          class="operation-expression"
+          id="unlimitedOperation">
+
+          8 + 5
+
+        </div>
+
+
+        <input
+          type="number"
+          id="unlimitedAnswer"
+          class="operation-input"
+          placeholder="اكتب النتيجة"
+          inputmode="numeric"
+          autocomplete="off"
+        >
+
+
+        <button
+          class="operation-check"
+          id="checkUnlimited">
+
+          ✅ تحقق
+
+        </button>
+
+
+        <div
+          class="operation-result"
+          id="unlimitedMessage">
+
+          ابدأ بحل العملية بالمعداد
+
+        </div>
+
+
+        <div
+          class="operation-score"
+          id="unlimitedScore">
+
+          ⭐ النقاط: 0
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LEARNING
+===================================================== -->
+
+<section class="learning-section">
+
+
+  <h2>
+    🎓 تعلّم بالمعداد
+  </h2>
+
+
+  <div
+    class="learning-number"
+    id="learningNumber">
+
+    8
+
+  </div>
+
+
+  <div
+    class="learning-equation"
+    id="learningEquation">
+
+    8 + 5 = 13
+
+  </div>
+
+
+  <div
+    class="learning-step"
+    id="learningStep">
+
+    اضغط «ابدأ التعلم» لبدء الدرس.
+
+  </div>
+
+
+  <div
+    class="learning-message"
+    id="learningMessage">
+
+    سنتعلم الحمل في المعداد خطوة بخطوة.
+
+  </div>
+
+
+  <div class="learning-progress">
+
+    <div
+      class="learning-progress-bar"
+      id="learningProgress">
+    </div>
+
+  </div>
+
+
+  <div class="learning-buttons">
+
+    <button
+      class="learning-button"
+      id="startLearning">
+
+      ▶️ ابدأ التعلم
+
+    </button>
+
+    <button
+      class="learning-button"
+      id="previousStep">
+
+      ◀ السابق
+
+    </button>
+
+    <button
+      class="learning-button"
+      id="nextStep">
+
+      التالي ▶
+
+    </button>
+
+  </div>
+
+
+</section>
+
+
+
+<script>
+
+/* =========================================================
+   ABACUS STATE
+========================================================= */
+
+const values = [0, 0, 0, 0, 0];
+
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const resultNumber =
+  document.getElementById("resultNumber");
+
+const resetButton =
+  document.getElementById("resetButton");
+
+const speakButton =
+  document.getElementById("speakButton");
+
+
+
+/* =========================================================
+   GET NUMBER
+========================================================= */
+
+function getNumber() {
+
+  return (
+    values[0] * 10000 +
+    values[1] * 1000 +
+    values[2] * 100 +
+    values[3] * 10 +
+    values[4]
+  );
+
+}
+
+
+
+/* =========================================================
+   UPDATE NUMBER DISPLAY
+========================================================= */
+
+function updateNumberDisplay() {
+
+  const number = getNumber();
+
+  if (resultNumber) {
+    resultNumber.textContent = number;
+  }
+
+  const tenThousands =
+    document.getElementById("tenThousands");
+
+  const thousands =
+    document.getElementById("thousands");
+
+  const hundreds =
+    document.getElementById("hundreds");
+
+  const tens =
+    document.getElementById("tens");
+
+  const ones =
+    document.getElementById("ones");
+
+
+  if (tenThousands)
+    tenThousands.textContent = values[0];
+
+  if (thousands)
+    thousands.textContent = values[1];
+
+  if (hundreds)
+    hundreds.textContent = values[2];
+
+  if (tens)
+    tens.textContent = values[3];
+
+  if (ones)
+    ones.textContent = values[4];
+
+}
+
+
+
+/* =========================================================
+   UPDATE ABACUS
+========================================================= */
+
+function updateAbacus() {
+
+  const columns =
+    document.querySelectorAll(".column");
+
+
+  columns.forEach((column, index) => {
+
+    const topBead =
+      column.querySelector(".top-bead");
+
+    const bottomBeads =
+      column.querySelectorAll(".lower-bead");
+
+
+    const beam =
+      document.querySelector(".beam");
+
+
+    if (!topBead || !beam) return;
+
+
+    const columnHeight =
+      column.clientHeight;
+
+
+    const beamRect =
+      beam.getBoundingClientRect();
+
+
+    const columnRect =
+      column.getBoundingClientRect();
+
+
+    const beamTop =
+      beamRect.top - columnRect.top;
+
+    const beamBottom =
+      beamRect.bottom - columnRect.top;
+
+
+    const beamGap = 20;
+    const beadGap = 14;
+
+
+    /* ================================================
+       TOP BEAD = 5
+    ================================================ */
+
+    if (values[index] >= 5) {
+
+      const topHeight =
+        topBead.offsetHeight;
+
+      topBead.style.top =
+        (
+          beamTop -
+          topHeight
+        ) + "px";
+
+    } else {
+
+      topBead.style.top =
+        "10px";
+
+    }
+
+
+    /* ================================================
+       LOWER BEADS
+    ================================================ */
+
+    const lowerCount =
+      values[index] % 5;
+
+
+    bottomBeads.forEach(
+      (bead, beadIndex) => {
+
+        const beadHeight =
+          bead.offsetHeight;
+
+
+        if (beadIndex < lowerCount) {
+
+          const position =
+            beamBottom +
+            beamGap +
+            beadIndex *
+            (beadHeight + beadGap);
+
+
+          bead.style.top =
+            position + "px";
+
+        } else {
+
+          const position =
+            columnHeight -
+            beadHeight -
+            8 -
+            (3 - beadIndex) *
+            (beadHeight + beadGap);
+
+
+          bead.style.top =
+            position + "px";
+
+        }
+
+      }
+    );
+
+  });
+
+
+  updateNumberDisplay();
+
+}
+
+
+
+/* =========================================================
+   TOP BEAD CLICK
+========================================================= */
+
+document.querySelectorAll(
+  ".top-bead"
+).forEach((bead) => {
+
+  bead.addEventListener(
+    "click",
+    () => {
+
+      const column =
+        bead.closest(".column");
+
+      const index =
+        Number(column.dataset.index);
+
+
+      const lower =
+        values[index] % 5;
+
+
+      if (values[index] >= 5) {
+
+        values[index] =
+          lower;
+
+      } else {
+
+        values[index] =
+          5 + lower;
+
+      }
+
+
+      updateAbacus();
+
+    }
+  );
+
+});
+
+
+
+/* =========================================================
+   LOWER BEADS CLICK
+========================================================= */
+
+document.querySelectorAll(
+  ".lower-bead"
+).forEach((bead) => {
+
+  bead.addEventListener(
+    "click",
+    () => {
+
+      const column =
+        bead.closest(".column");
+
+      const columnIndex =
+        Number(column.dataset.index);
+
+
+      const beadIndex =
+        Number(bead.dataset.index);
+
+
+      const wanted =
+        beadIndex + 1;
+
+
+      const upper =
+        values[columnIndex] >= 5
+          ? 5
+          : 0;
+
+
+      const currentLower =
+        values[columnIndex] % 5;
+
+
+      if (currentLower === wanted) {
+
+        values[columnIndex] =
+          upper + wanted - 1;
+
+      } else {
+
+        values[columnIndex] =
+          upper + wanted;
+
+      }
+
+
+      updateAbacus();
+
+    }
+  );
+
+});
+
+
+
+/* =========================================================
+   RESET ABACUS
+========================================================= */
+
+function resetAbacus() {
+
+  for (
+    let i = 0;
+    i < values.length;
+    i++
+  ) {
+
+    values[i] = 0;
+
+  }
+
+
+  updateAbacus();
+
+}
+
+
+
+/* =========================================================
+   RESET BUTTON
+========================================================= */
+
+if (resetButton) {
+
+  resetButton.addEventListener(
+    "click",
+    resetAbacus
+  );
+
+}
+
+
+
+/* =========================================================
+   SPEAK NUMBER
+========================================================= */
+
+function speakNumber() {
+
+  const number =
+    getNumber();
+
+
+  if (
+    typeof speechSynthesis ===
+    "undefined"
+  ) {
+
+    return;
+
+  }
+
+
+  speechSynthesis.cancel();
+
+
+  const speech =
+    new SpeechSynthesisUtterance(
+      "العدد " + number
+    );
+
+
+  speech.lang = "ar-SA";
+  speech.rate = 0.8;
+
+
+  speechSynthesis.speak(
+    speech
+  );
+
+}
+
+
+
+if (speakButton) {
+
+  speakButton.addEventListener(
+    "click",
+    speakNumber
+  );
+
+}
+
+
+
+/* =========================================================
+   LEARNING
+========================================================= */
+
+const learningSteps = [
+
+  {
+    number: 8,
+    equation: "8 + 5 = 13",
+
+    text:
+      "الخطوة 1: كوّن العدد 8 في خانة الآحاد. " +
+      "استعمل 3 خرزات سفلية والخرزة العلوية التي تساوي 5."
+  },
+
+  {
+    number: 8,
+    equation: "8 + 5 = 13",
+
+    text:
+      "الخطوة 2: نريد إضافة 5، لكن خانة الآحاد لا يمكنها الاحتفاظ بـ 13 خرزة. " +
+      "نحتاج إلى الحمل."
+  },
+
+  {
+    number: 3,
+    equation: "8 + 5 = 13",
+
+    text:
+      "الخطوة 3: نحول 10 آحاد إلى عشرة واحدة، " +
+      "ونُبقي 3 آحاد."
+  },
+
+  {
+    number: 13,
+    equation: "8 + 5 = 13",
+
+    text:
+      "الخطوة 4: أصبح لدينا 1 عشرة و3 آحاد. " +
+      "إذن العدد هو 13."
+  }
+
+];
+
+
+let currentLearningStep = 0;
+
+
+
+/* =========================================================
+   SAFE TEXT
+========================================================= */
+
+function safeText(
+  id,
+  value
+) {
+
+  const element =
+    document.getElementById(id);
+
+  if (element) {
+
+    element.textContent =
+      value;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   HIGHLIGHT LEARNING COLUMNS
+========================================================= */
+
+function highlightLearningColumns() {
+
+  document.querySelectorAll(
+    ".column"
+  ).forEach(
+    column => {
+
+      column.classList.remove(
+        "learning-highlight"
+      );
+
+    }
+  );
+
+
+  const columns =
+    document.querySelectorAll(
+      ".column"
+    );
+
+
+  /* العشرات والآحاد */
+
+  if (columns[3])
+    columns[3].classList.add(
+      "learning-highlight"
+    );
+
+  if (columns[4])
+    columns[4].classList.add(
+      "learning-highlight"
+    );
+
+}
+
+
+
+/* =========================================================
+   SHOW LESSON
+========================================================= */
+
+function showLesson() {
+
+  const lesson =
+    learningSteps[
+      currentLearningStep
+    ];
+
+
+  if (!lesson) return;
+
+
+  safeText(
+    "learningNumber",
+    lesson.number
+  );
+
+
+  safeText(
+    "learningEquation",
+    lesson.equation
+  );
+
+
+  safeText(
+    "learningStep",
+    lesson.text
+  );
+
+
+  if (
+    currentLearningStep ===
+    learningSteps.length - 1
+  ) {
+
+    safeText(
+      "learningMessage",
+      "🎉 أحسنت! لقد فهمت فكرة الحمل في المعداد."
+    );
+
+  } else {
+
+    safeText(
+      "learningMessage",
+      "حرّك الخرز وتابع الخطوة التالية."
+    );
+
+  }
+
+
+  const progress =
+    document.getElementById(
+      "learningProgress"
+    );
+
+
+  if (progress) {
+
+    const percentage =
+      (
+        (currentLearningStep + 1) /
+        learningSteps.length
+      ) * 100;
+
+
+    progress.style.width =
+      percentage + "%";
+
+  }
+
+
+  const previous =
+    document.getElementById(
+      "previousStep"
+    );
+
+
+  const next =
+    document.getElementById(
+      "nextStep"
+    );
+
+
+  if (previous) {
+
+    previous.disabled =
+      currentLearningStep === 0;
+
+  }
+
+
+  if (next) {
+
+    next.disabled =
+      currentLearningStep ===
+      learningSteps.length - 1;
+
+  }
+
+
+  /*
+     التعلم فقط هو المرتبط بالمعداد.
+  */
+
+  if (
+    currentLearningStep === 0
+  ) {
+
+    values[0] = 8;
+    values[1] = 0;
+    values[2] = 0;
+    values[3] = 0;
+    values[4] = 0;
+
+  }
+
+
+  if (
+    currentLearningStep === 3
+  ) {
+
+    values[0] = 0;
+    values[1] = 0;
+    values[2] = 0;
+    values[3] = 1;
+    values[4] = 3;
+
+  }
+
+
+  updateAbacus();
+
+
+  highlightLearningColumns();
+
+}
+
+
+
+/* =========================================================
+   START LEARNING
+========================================================= */
+
+const startLearning =
+  document.getElementById(
+    "startLearning"
+  );
+
+
+if (startLearning) {
+
+  startLearning.addEventListener(
+    "click",
+    () => {
+
+      currentLearningStep = 0;
+
+      showLesson();
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   PREVIOUS STEP
+========================================================= */
+
+const previousStep =
+  document.getElementById(
+    "previousStep"
+  );
+
+
+if (previousStep) {
+
+  previousStep.addEventListener(
+    "click",
+    () => {
+
+      if (
+        currentLearningStep > 0
+      ) {
+
+        currentLearningStep--;
+
+        showLesson();
+
+      }
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   NEXT STEP
+========================================================= */
+
+const nextStep =
+  document.getElementById(
+    "nextStep"
+  );
+
+
+if (nextStep) {
+
+  nextStep.addEventListener(
+    "click",
+    () => {
+
+      if (
+        currentLearningStep <
+        learningSteps.length - 1
+      ) {
+
+        currentLearningStep++;
+
+        showLesson();
+
+      }
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   UNLIMITED OPERATIONS
+   مستقل تمامًا عن المعداد
+========================================================= */
+
+let unlimitedA = 0;
+
+let unlimitedB = 0;
+
+let unlimitedOperator = "+";
+
+let unlimitedCorrectAnswer = 0;
+
+let unlimitedScore = 0;
+
+
+
+/* =========================================================
+   NEW OPERATION
+========================================================= */
+
+function newUnlimitedOperation() {
+
+  unlimitedA =
+    Math.floor(
+      Math.random() * 10
+    ) + 1;
+
+
+  unlimitedB =
+    Math.floor(
+      Math.random() * 10
+    ) + 1;
+
+
+  if (
+    Math.random() < 0.5
+  ) {
+
+    unlimitedOperator = "+";
+
+
+    unlimitedCorrectAnswer =
+      unlimitedA +
+      unlimitedB;
+
+  } else {
+
+
+    if (
+      unlimitedB >
+      unlimitedA
+    ) {
+
+      const temp =
+        unlimitedA;
+
+      unlimitedA =
+        unlimitedB;
+
+      unlimitedB =
+        temp;
+
+    }
+
+
+    unlimitedOperator = "-";
+
+
+    unlimitedCorrectAnswer =
+      unlimitedA -
+      unlimitedB;
+
+  }
+
+
+  const operation =
+    document.getElementById(
+      "unlimitedOperation"
+    );
+
+
+  const answer =
+    document.getElementById(
+      "unlimitedAnswer"
+    );
+
+
+  const message =
+    document.getElementById(
+      "unlimitedMessage"
+    );
+
+
+  if (operation) {
+
+    operation.textContent =
+      `${unlimitedA} ${unlimitedOperator} ${unlimitedB}`;
+
+  }
+
+
+  if (answer) {
+
+    answer.value = "";
+
+  }
+
+
+  if (message) {
+
+    message.textContent =
+      "استعمل المعداد ثم اكتب النتيجة.";
+
+  }
+
+}
+
+
+
+/* =========================================================
+   CHECK OPERATION
+========================================================= */
+
+function checkUnlimitedOperation() {
+
+  const answer =
+    document.getElementById(
+      "unlimitedAnswer"
+    );
+
+
+  const message =
+    document.getElementById(
+      "unlimitedMessage"
+    );
+
+
+  const score =
+    document.getElementById(
+      "unlimitedScore"
+    );
+
+
+  if (!answer || !message)
+    return;
+
+
+  if (
+    answer.value.trim() === ""
+  ) {
+
+    message.textContent =
+      "✏️ اكتب النتيجة أولًا.";
+
+    return;
+
+  }
+
+
+  const userAnswer =
+    Number(answer.value);
+
+
+  if (
+    userAnswer ===
+    unlimitedCorrectAnswer
+  ) {
+
+    unlimitedScore++;
+
+
+    message.textContent =
+      `🎉 ممتاز! ${unlimitedA} ${unlimitedOperator} ${unlimitedB} = ${unlimitedCorrectAnswer}`;
+
+
+    if (score) {
+
+      score.textContent =
+        `⭐ النقاط: ${unlimitedScore}`;
+
+    }
+
+
+    setTimeout(
+      newUnlimitedOperation,
+      1500
+    );
+
+  } else {
+
+    message.textContent =
+      "❌ ليست الإجابة الصحيحة، حاول مرة أخرى.";
+
+  }
+
+}
+
+
+
+/* =========================================================
+   CHECK BUTTON
+========================================================= */
+
+const checkUnlimited =
+  document.getElementById(
+    "checkUnlimited"
+  );
+
+
+if (checkUnlimited) {
+
+  checkUnlimited.addEventListener(
+    "click",
+    checkUnlimitedOperation
+  );
+
+}
+
+
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+const unlimitedAnswer =
+  document.getElementById(
+    "unlimitedAnswer"
+  );
+
+
+if (unlimitedAnswer) {
+
+  unlimitedAnswer.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        checkUnlimitedOperation();
+
+      }
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+/*
+   المعداد يبدأ بصفر.
+   العملية تبدأ بشكل مستقل.
+*/
+
+updateAbacus();
+
+newUnlimitedOperation();
+
+
+</script>
+
+</body>
+</html>
