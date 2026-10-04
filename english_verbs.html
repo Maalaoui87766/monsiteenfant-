@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Basic Verbs | English</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin:12px auto;
+    padding:20px;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.emoji{
+    font-size:50px;
+}
+
+.english{
+    font-size:28px;
+    font-weight:bold;
+    color:#2196F3;
+    margin-top:8px;
+}
+
+.arabic{
+    font-size:20px;
+    color:#555;
+    margin-top:6px;
+}
+
+.speak{
+    margin-top:12px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🏃 Basic Verbs
+</header>
+
+<div class="container">
+
+<div class="card">
+    <div class="emoji">🏃</div>
+    <div class="english">Run</div>
+    <div class="arabic">يجري</div>
+    <button class="speak" onclick="speakEnglish('Run')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚶</div>
+    <div class="english">Walk</div>
+    <div class="arabic">يمشي</div>
+    <button class="speak" onclick="speakEnglish('Walk')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍎</div>
+    <div class="english">Eat</div>
+    <div class="arabic">يأكل</div>
+    <button class="speak" onclick="speakEnglish('Eat')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🥤</div>
+    <div class="english">Drink</div>
+    <div class="arabic">يشرب</div>
+    <button class="speak" onclick="speakEnglish('Drink')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">😴</div>
+    <div class="english">Sleep</div>
+    <div class="arabic">ينام</div>
+    <button class="speak" onclick="speakEnglish('Sleep')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">📖</div>
+    <div class="english">Read</div>
+    <div class="arabic">يقرأ</div>
+    <button class="speak" onclick="speakEnglish('Read')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">✏️</div>
+    <div class="english">Write</div>
+    <div class="arabic">يكتب</div>
+    <button class="speak" onclick="speakEnglish('Write')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">⚽</div>
+    <div class="english">Play</div>
+    <div class="arabic">يلعب</div>
+    <button class="speak" onclick="speakEnglish('Play')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">👂</div>
+    <div class="english">Listen</div>
+    <div class="arabic">يستمع</div>
+    <button class="speak" onclick="speakEnglish('Listen')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">👀</div>
+    <div class="english">Look</div>
+    <div class="arabic">ينظر</div>
+    <button class="speak" onclick="speakEnglish('Look')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🗣️</div>
+    <div class="english">Speak</div>
+    <div class="arabic">يتحدث</div>
+    <button class="speak" onclick="speakEnglish('Speak')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🧹</div>
+    <div class="english">Clean</div>
+    <div class="arabic">ينظف</div>
+    <button class="speak" onclick="speakEnglish('Clean')">
+        🔊 Listen
+    </button>
+</div>
+
+<a href="english.html" class="back">
+⬅️ Back to English
+</a>
+
+</div>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

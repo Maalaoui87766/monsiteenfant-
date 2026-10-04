@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Colors - أكاديمية الطفل الذكي</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.colors-page{
+    max-width:900px;
+    margin:auto;
+    padding:15px;
+}
+
+.colors-header{
+    background:white;
+    border-radius:20px;
+    padding:18px;
+    text-align:center;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.colors-header h2{
+    color:#4CAF50;
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.colors-header p{
+    color:#555;
+    font-size:16px;
+}
+
+.colors-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.color-card{
+    background:white;
+    border-radius:25px;
+    min-height:230px;
+    padding:18px 10px;
+    text-align:center;
+    box-shadow:0 3px 8px #ccc;
+}
+
+.color-circle{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    margin:0 auto 12px;
+    border:4px solid #eee;
+}
+
+.color-word{
+    font-size:27px;
+    font-weight:bold;
+    color:#222;
+}
+
+.color-arabic{
+    font-size:19px;
+    color:#777;
+    margin-top:8px;
+}
+
+.speak-button{
+    width:72px;
+    height:72px;
+    border:none;
+    border-radius:50%;
+    background:#4CAF50;
+    color:white;
+    font-size:32px;
+    margin-top:14px;
+    cursor:pointer;
+    box-shadow:0 2px 5px #bbb;
+}
+
+.speak-button:active{
+    transform:scale(.94);
+}
+
+.back-button{
+    display:block;
+    width:220px;
+    margin:25px auto;
+    padding:13px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    border-radius:20px;
+    font-size:18px;
+}
+
+@media(max-width:600px){
+
+    .colors-page{
+        padding:10px;
+    }
+
+    .colors-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .color-card{
+        min-height:215px;
+        padding:15px 6px;
+    }
+
+    .color-circle{
+        width:72px;
+        height:72px;
+    }
+
+    .color-word{
+        font-size:23px;
+    }
+
+    .color-arabic{
+        font-size:17px;
+    }
+
+    .speak-button{
+        width:68px;
+        height:68px;
+        font-size:30px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+🇬🇧 English Colors 🇬🇧
+</header>
+
+<main class="colors-page">
+
+<section class="colors-header">
+
+<h2>🎨 Colors</h2>
+
+<p>Learn English colors with pronunciation 🔊</p>
+
+</section>
+
+
+<section class="colors-grid">
+
+
+<!-- Red -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#F44336;"></div>
+
+<div class="color-word">
+Red
+</div>
+
+<div class="color-arabic">
+أحمر
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Red')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Blue -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#2196F3;"></div>
+
+<div class="color-word">
+Blue
+</div>
+
+<div class="color-arabic">
+أزرق
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Blue')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Green -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#4CAF50;"></div>
+
+<div class="color-word">
+Green
+</div>
+
+<div class="color-arabic">
+أخضر
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Green')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Yellow -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#FFEB3B;"></div>
+
+<div class="color-word">
+Yellow
+</div>
+
+<div class="color-arabic">
+أصفر
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Yellow')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Orange -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#FF9800;"></div>
+
+<div class="color-word">
+Orange
+</div>
+
+<div class="color-arabic">
+برتقالي
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Orange')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Purple -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#9C27B0;"></div>
+
+<div class="color-word">
+Purple
+</div>
+
+<div class="color-arabic">
+بنفسجي
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Purple')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Pink -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#E91E63;"></div>
+
+<div class="color-word">
+Pink
+</div>
+
+<div class="color-arabic">
+وردي
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Pink')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Brown -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#795548;"></div>
+
+<div class="color-word">
+Brown
+</div>
+
+<div class="color-arabic">
+بني
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Brown')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Black -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:#111;"></div>
+
+<div class="color-word">
+Black
+</div>
+
+<div class="color-arabic">
+أسود
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Black')">
+🔊
+</button>
+
+</div>
+
+
+<!-- White -->
+
+<div class="color-card">
+
+<div class="color-circle"
+style="background:white;"></div>
+
+<div class="color-word">
+White
+</div>
+
+<div class="color-arabic">
+أبيض
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('White')">
+🔊
+</button>
+
+</div>
+
+
+</section>
+
+
+<a href="english.html"
+class="back-button">
+
+⬅️ Back to English
+
+</a>
+
+</main>
+
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+        new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+
+        speech.rate = 0.8;
+
+        speech.pitch = 1;
+
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert(
+        "Speech is not available in this browser."
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

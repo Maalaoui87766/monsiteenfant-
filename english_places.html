@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Places | English</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin:12px auto;
+    padding:20px;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.emoji{
+    font-size:50px;
+}
+
+.english{
+    font-size:28px;
+    font-weight:bold;
+    color:#2196F3;
+    margin-top:8px;
+}
+
+.arabic{
+    font-size:20px;
+    color:#555;
+    margin-top:6px;
+}
+
+.speak{
+    margin-top:12px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🏠 Places
+</header>
+
+<div class="container">
+
+<div class="card">
+    <div class="emoji">🏠</div>
+    <div class="english">Home</div>
+    <div class="arabic">المنزل</div>
+    <button class="speak" onclick="speakEnglish('Home')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🏫</div>
+    <div class="english">School</div>
+    <div class="arabic">المدرسة</div>
+    <button class="speak" onclick="speakEnglish('School')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🌳</div>
+    <div class="english">Park</div>
+    <div class="arabic">الحديقة</div>
+    <button class="speak" onclick="speakEnglish('Park')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🏥</div>
+    <div class="english">Hospital</div>
+    <div class="arabic">المستشفى</div>
+    <button class="speak" onclick="speakEnglish('Hospital')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🛒</div>
+    <div class="english">Shop</div>
+    <div class="arabic">المتجر</div>
+    <button class="speak" onclick="speakEnglish('Shop')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🦁</div>
+    <div class="english">Zoo</div>
+    <div class="arabic">حديقة الحيوانات</div>
+    <button class="speak" onclick="speakEnglish('Zoo')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">📚</div>
+    <div class="english">Library</div>
+    <div class="arabic">المكتبة</div>
+    <button class="speak" onclick="speakEnglish('Library')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🏖️</div>
+    <div class="english">Beach</div>
+    <div class="arabic">الشاطئ</div>
+    <button class="speak" onclick="speakEnglish('Beach')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍽️</div>
+    <div class="english">Restaurant</div>
+    <div class="arabic">المطعم</div>
+    <button class="speak" onclick="speakEnglish('Restaurant')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚉</div>
+    <div class="english">Station</div>
+    <div class="arabic">المحطة</div>
+    <button class="speak" onclick="speakEnglish('Station')">
+        🔊 Listen
+    </button>
+</div>
+
+<a href="english.html" class="back">
+⬅️ Back to English
+</a>
+
+</div>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

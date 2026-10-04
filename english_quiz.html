@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Quiz | أكاديمية الطفل الذكي</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px 10px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+    max-width:600px;
+    margin:auto;
+}
+
+.quiz-box{
+    background:white;
+    margin:15px 0;
+    padding:25px 15px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.progress{
+    color:#666;
+    font-size:17px;
+    margin-bottom:15px;
+}
+
+.question{
+    font-size:26px;
+    font-weight:bold;
+    color:#2196F3;
+    margin:15px 0;
+}
+
+.question-arabic{
+    font-size:19px;
+    color:#555;
+    margin-bottom:20px;
+}
+
+.speak{
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:10px 20px;
+    font-size:17px;
+    margin-bottom:20px;
+}
+
+.answer{
+    display:block;
+    width:90%;
+    margin:10px auto;
+    padding:14px;
+    border:none;
+    border-radius:15px;
+    background:#2196F3;
+    color:white;
+    font-size:20px;
+}
+
+.answer:active{
+    opacity:.8;
+}
+
+.result{
+    font-size:22px;
+    font-weight:bold;
+    margin:20px 0;
+}
+
+.next{
+    background:#FF9800;
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:12px 25px;
+    font-size:18px;
+}
+
+.restart{
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:12px 25px;
+    font-size:18px;
+    margin-top:15px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px 5px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+🎯 English Quiz
+</header>
+
+<div class="container">
+
+<div class="quiz-box">
+
+<div id="progress" class="progress"></div>
+
+<div id="question" class="question"></div>
+
+<div id="questionArabic" class="question-arabic"></div>
+
+<button class="speak" onclick="speakQuestion()">
+🔊 Listen
+</button>
+
+<div id="answers"></div>
+
+<div id="result" class="result"></div>
+
+<button id="nextButton"
+        class="next"
+        onclick="nextQuestion()"
+        style="display:none;">
+Next ➡️
+</button>
+
+</div>
+
+<a href="english.html" class="back">
+⬅️ Back to English
+</a>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+    question:"What is this? 🍎",
+    speech:"What is this?",
+    arabic:"ما هذا؟",
+    answers:["Apple","Banana","Orange"],
+    correct:"Apple"
+},
+
+{
+    question:"What animal is this? 🐱",
+    speech:"What animal is this?",
+    arabic:"ما هذا الحيوان؟",
+    answers:["Dog","Cat","Lion"],
+    correct:"Cat"
+},
+
+{
+    question:"What color is this? 🔴",
+    speech:"What color is this?",
+    arabic:"ما هذا اللون؟",
+    answers:["Blue","Green","Red"],
+    correct:"Red"
+},
+
+{
+    question:"What is this? 🚌",
+    speech:"What is this?",
+    arabic:"ما هذا؟",
+    answers:["Car","Bus","Train"],
+    correct:"Bus"
+},
+
+{
+    question:"What is this? 🐘",
+    speech:"What is this?",
+    arabic:"ما هذا الحيوان؟",
+    answers:["Elephant","Tiger","Rabbit"],
+    correct:"Elephant"
+},
+
+{
+    question:"What is this? 📚",
+    speech:"What is this?",
+    arabic:"ما هذا؟",
+    answers:["Pen","Book","Chair"],
+    correct:"Book"
+},
+
+{
+    question:"What is this? ☀️",
+    speech:"What is this?",
+    arabic:"ما هذا؟",
+    answers:["Moon","Sun","Star"],
+    correct:"Sun"
+},
+
+{
+    question:"What is this? 👕",
+    speech:"What is this?",
+    arabic:"ما هذا؟",
+    answers:["Shoes","Shirt","Scarf"],
+    correct:"Shirt"
+},
+
+{
+    question:"What is this? 🐶",
+    speech:"What animal is this?",
+    arabic:"ما هذا الحيوان؟",
+    answers:["Dog","Horse","Fish"],
+    correct:"Dog"
+},
+
+{
+    question:"What is this? 🌳",
+    speech:"What is this?",
+    arabic:"ما هذا؟",
+    answers:["Flower","Tree","Grass"],
+    correct:"Tree"
+}
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+
+/* تحميل السؤال */
+
+function loadQuestion(){
+
+    answered = false;
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("progress").textContent =
+        "Question " + (currentQuestion + 1) +
+        " / " + questions.length;
+
+    document.getElementById("question").textContent =
+        q.question;
+
+    document.getElementById("questionArabic").textContent =
+        q.arabic;
+
+    document.getElementById("result").textContent = "";
+
+    document.getElementById("nextButton").style.display =
+        "none";
+
+    const answersDiv =
+        document.getElementById("answers");
+
+    answersDiv.innerHTML = "";
+
+    q.answers.forEach(function(answer){
+
+        const button =
+            document.createElement("button");
+
+        button.className = "answer";
+
+        button.textContent = answer;
+
+        button.onclick = function(){
+
+            checkAnswer(answer, button);
+
+        };
+
+        answersDiv.appendChild(button);
+
+    });
+}
+
+
+/* التحقق من الإجابة */
+
+function checkAnswer(answer, button){
+
+    if(answered){
+        return;
+    }
+
+    answered = true;
+
+    const q = questions[currentQuestion];
+
+    if(answer === q.correct){
+
+        score++;
+
+        document.getElementById("result").textContent =
+            "🎉 Correct! Excellent!";
+
+        button.style.background =
+            "#4CAF50";
+
+    }else{
+
+        document.getElementById("result").textContent =
+            "❌ Try again!";
+
+        button.style.background =
+            "#F44336";
+
+    }
+
+    document.getElementById("nextButton").style.display =
+        "inline-block";
+
+    /*
+       مهم:
+       لا يوجد أي نطق هنا.
+       النطق يتم فقط من زر Listen.
+    */
+}
+
+
+/* السؤال التالي */
+
+function nextQuestion(){
+
+    currentQuestion++;
+
+    if(currentQuestion >= questions.length){
+
+        showFinalResult();
+
+    }else{
+
+        loadQuestion();
+
+    }
+}
+
+
+/* النتيجة النهائية */
+
+function showFinalResult(){
+
+    document.getElementById("progress").textContent =
+        "🎉 Quiz Finished!";
+
+    document.getElementById("question").textContent =
+        "Your Score";
+
+    document.getElementById("questionArabic").textContent =
+        "نتيجتك";
+
+    document.getElementById("answers").innerHTML = "";
+
+    document.getElementById("result").textContent =
+        score + " / " + questions.length;
+
+    document.getElementById("nextButton").style.display =
+        "none";
+
+    const restart =
+        document.createElement("button");
+
+    restart.className = "restart";
+
+    restart.textContent =
+        "🔄 Try Again";
+
+    restart.onclick =
+        restartQuiz;
+
+    document.getElementById("answers")
+        .appendChild(restart);
+}
+
+
+/* إعادة الاختبار */
+
+function restartQuiz(){
+
+    currentQuestion = 0;
+
+    score = 0;
+
+    loadQuestion();
+}
+
+
+/* زر Listen */
+
+function speakQuestion(){
+
+    const q =
+        questions[currentQuestion];
+
+    if(!q){
+        return;
+    }
+
+    /*
+       ننطق speech فقط
+       وليس question
+       ولا correct
+    */
+
+    speakEnglish(q.speech);
+}
+
+
+/* النطق الإنجليزي */
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance();
+
+        speech.text = text;
+
+        speech.lang = "en-US";
+
+        speech.rate = 0.8;
+
+        speech.pitch = 1;
+
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert(
+            "Speech is not available in this browser."
+        );
+
+    }
+}
+
+
+/* تشغيل أول سؤال */
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

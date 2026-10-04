@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Food | English</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin:12px auto;
+    padding:20px;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.emoji{
+    font-size:50px;
+}
+
+.english{
+    font-size:28px;
+    font-weight:bold;
+    color:#2196F3;
+    margin-top:8px;
+}
+
+.arabic{
+    font-size:20px;
+    color:#555;
+    margin-top:6px;
+}
+
+.speak{
+    margin-top:12px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🍎 Food
+</header>
+
+<div class="container">
+
+<div class="card">
+    <div class="emoji">🍎</div>
+    <div class="english">Apple</div>
+    <div class="arabic">تفاحة</div>
+    <button class="speak" onclick="speakEnglish('Apple')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍌</div>
+    <div class="english">Banana</div>
+    <div class="arabic">موزة</div>
+    <button class="speak" onclick="speakEnglish('Banana')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍊</div>
+    <div class="english">Orange</div>
+    <div class="arabic">برتقالة</div>
+    <button class="speak" onclick="speakEnglish('Orange')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍞</div>
+    <div class="english">Bread</div>
+    <div class="arabic">خبز</div>
+    <button class="speak" onclick="speakEnglish('Bread')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🧀</div>
+    <div class="english">Cheese</div>
+    <div class="arabic">جبن</div>
+    <button class="speak" onclick="speakEnglish('Cheese')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🥚</div>
+    <div class="english">Egg</div>
+    <div class="arabic">بيضة</div>
+    <button class="speak" onclick="speakEnglish('Egg')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍚</div>
+    <div class="english">Rice</div>
+    <div class="arabic">أرز</div>
+    <button class="speak" onclick="speakEnglish('Rice')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍗</div>
+    <div class="english">Chicken</div>
+    <div class="arabic">دجاج</div>
+    <button class="speak" onclick="speakEnglish('Chicken')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🥕</div>
+    <div class="english">Carrot</div>
+    <div class="arabic">جزر</div>
+    <button class="speak" onclick="speakEnglish('Carrot')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🥔</div>
+    <div class="english">Potato</div>
+    <div class="arabic">بطاطا</div>
+    <button class="speak" onclick="speakEnglish('Potato')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍕</div>
+    <div class="english">Pizza</div>
+    <div class="arabic">بيتزا</div>
+    <button class="speak" onclick="speakEnglish('Pizza')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍰</div>
+    <div class="english">Cake</div>
+    <div class="arabic">كعكة</div>
+    <button class="speak" onclick="speakEnglish('Cake')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🥛</div>
+    <div class="english">Milk</div>
+    <div class="arabic">حليب</div>
+    <button class="speak" onclick="speakEnglish('Milk')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">💧</div>
+    <div class="english">Water</div>
+    <div class="arabic">ماء</div>
+    <button class="speak" onclick="speakEnglish('Water')">
+        🔊 Listen
+    </button>
+</div>
+
+<a href="english.html" class="back">
+⬅️ Back to English
+</a>
+
+</div>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

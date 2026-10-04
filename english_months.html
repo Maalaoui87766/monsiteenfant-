@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Months of the Year | English</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin:12px auto;
+    padding:18px;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.english{
+    font-size:28px;
+    font-weight:bold;
+    color:#2196F3;
+}
+
+.arabic{
+    font-size:20px;
+    color:#555;
+    margin-top:6px;
+}
+
+.speak{
+    margin-top:12px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+📅 Months of the Year
+</header>
+
+<div class="container">
+
+<div class="card">
+    <div class="english">January</div>
+    <div class="arabic">يناير</div>
+    <button class="speak" onclick="speakEnglish('January')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">February</div>
+    <div class="arabic">فبراير</div>
+    <button class="speak" onclick="speakEnglish('February')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">March</div>
+    <div class="arabic">مارس</div>
+    <button class="speak" onclick="speakEnglish('March')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">April</div>
+    <div class="arabic">أبريل</div>
+    <button class="speak" onclick="speakEnglish('April')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">May</div>
+    <div class="arabic">ماي</div>
+    <button class="speak" onclick="speakEnglish('May')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">June</div>
+    <div class="arabic">يونيو</div>
+    <button class="speak" onclick="speakEnglish('June')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">July</div>
+    <div class="arabic">يوليو</div>
+    <button class="speak" onclick="speakEnglish('July')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">August</div>
+    <div class="arabic">أغسطس</div>
+    <button class="speak" onclick="speakEnglish('August')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">September</div>
+    <div class="arabic">سبتمبر</div>
+    <button class="speak" onclick="speakEnglish('September')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">October</div>
+    <div class="arabic">أكتوبر</div>
+    <button class="speak" onclick="speakEnglish('October')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">November</div>
+    <div class="arabic">نوفمبر</div>
+    <button class="speak" onclick="speakEnglish('November')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="english">December</div>
+    <div class="arabic">ديسمبر</div>
+    <button class="speak" onclick="speakEnglish('December')">🔊 Listen</button>
+</div>
+
+<a href="english.html" class="back">
+⬅️ Back to English
+</a>
+
+</div>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Animals - أكاديمية الطفل الذكي</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.animals-page{
+    max-width:900px;
+    margin:auto;
+    padding:15px;
+}
+
+.animals-header{
+    background:white;
+    border-radius:20px;
+    padding:18px;
+    text-align:center;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.animals-header h2{
+    color:#4CAF50;
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.animals-header p{
+    color:#555;
+    font-size:16px;
+}
+
+.animals-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.animal-card{
+    background:white;
+    border-radius:25px;
+    min-height:235px;
+    padding:18px 10px;
+    text-align:center;
+    box-shadow:0 3px 8px #ccc;
+}
+
+.animal-icon{
+    font-size:65px;
+}
+
+.animal-word{
+    font-size:26px;
+    font-weight:bold;
+    color:#222;
+    margin-top:8px;
+}
+
+.animal-arabic{
+    font-size:19px;
+    color:#777;
+    margin-top:8px;
+}
+
+.speak-button{
+    width:72px;
+    height:72px;
+    border:none;
+    border-radius:50%;
+    background:#4CAF50;
+    color:white;
+    font-size:32px;
+    margin-top:14px;
+    cursor:pointer;
+    box-shadow:0 2px 5px #bbb;
+}
+
+.speak-button:active{
+    transform:scale(.94);
+}
+
+.back-button{
+    display:block;
+    width:220px;
+    margin:25px auto;
+    padding:13px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    border-radius:20px;
+    font-size:18px;
+}
+
+@media(max-width:600px){
+
+    .animals-page{
+        padding:10px;
+    }
+
+    .animals-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .animal-card{
+        min-height:220px;
+        padding:15px 6px;
+    }
+
+    .animal-icon{
+        font-size:55px;
+    }
+
+    .animal-word{
+        font-size:22px;
+    }
+
+    .animal-arabic{
+        font-size:17px;
+    }
+
+    .speak-button{
+        width:68px;
+        height:68px;
+        font-size:30px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+🇬🇧 English Animals 🇬🇧
+</header>
+
+<main class="animals-page">
+
+<section class="animals-header">
+
+<h2>🐾 Animals</h2>
+
+<p>Learn English animal names with pronunciation 🔊</p>
+
+</section>
+
+
+<section class="animals-grid">
+
+
+<!-- Cat -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐱</div>
+
+<div class="animal-word">
+Cat
+</div>
+
+<div class="animal-arabic">
+قطة
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Cat')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Dog -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐶</div>
+
+<div class="animal-word">
+Dog
+</div>
+
+<div class="animal-arabic">
+كلب
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Dog')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Lion -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🦁</div>
+
+<div class="animal-word">
+Lion
+</div>
+
+<div class="animal-arabic">
+أسد
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Lion')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Horse -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐴</div>
+
+<div class="animal-word">
+Horse
+</div>
+
+<div class="animal-arabic">
+حصان
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Horse')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Cow -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐄</div>
+
+<div class="animal-word">
+Cow
+</div>
+
+<div class="animal-arabic">
+بقرة
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Cow')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Sheep -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐑</div>
+
+<div class="animal-word">
+Sheep
+</div>
+
+<div class="animal-arabic">
+خروف
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Sheep')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Elephant -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐘</div>
+
+<div class="animal-word">
+Elephant
+</div>
+
+<div class="animal-arabic">
+فيل
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Elephant')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Monkey -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐒</div>
+
+<div class="animal-word">
+Monkey
+</div>
+
+<div class="animal-arabic">
+قرد
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Monkey')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Tiger -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐯</div>
+
+<div class="animal-word">
+Tiger
+</div>
+
+<div class="animal-arabic">
+نمر
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Tiger')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Rabbit -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐰</div>
+
+<div class="animal-word">
+Rabbit
+</div>
+
+<div class="animal-arabic">
+أرنب
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Rabbit')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Fish -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐟</div>
+
+<div class="animal-word">
+Fish
+</div>
+
+<div class="animal-arabic">
+سمكة
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Fish')">
+🔊
+</button>
+
+</div>
+
+
+<!-- Bird -->
+
+<div class="animal-card">
+
+<div class="animal-icon">🐦</div>
+
+<div class="animal-word">
+Bird
+</div>
+
+<div class="animal-arabic">
+طائر
+</div>
+
+<button class="speak-button"
+onclick="speakEnglish('Bird')">
+🔊
+</button>
+
+</div>
+
+
+</section>
+
+
+<a href="english.html"
+class="back-button">
+
+⬅️ Back to English
+
+</a>
+
+</main>
+
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+        new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+
+        speech.rate = 0.8;
+
+        speech.pitch = 1;
+
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert(
+        "Speech is not available in this browser."
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

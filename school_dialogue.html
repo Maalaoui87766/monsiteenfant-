@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>At School | أكاديمية الطفل الذكي</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    text-align:center;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px 10px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin-top:20px;
+    padding:15px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.title{
+    font-size:25px;
+    color:#2196F3;
+    margin-bottom:15px;
+}
+
+.dialogue-image{
+    width:100%;
+    max-width:1000px;
+    border-radius:15px;
+    display:block;
+    margin:10px auto;
+    background:#eee;
+}
+
+.scene{
+    margin-top:10px;
+    font-size:18px;
+    color:#777;
+    font-weight:bold;
+}
+
+button{
+    border:none;
+    color:white;
+    border-radius:25px;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+.listen{
+    margin-top:20px;
+    background:#2196F3;
+    padding:13px 30px;
+    font-size:20px;
+}
+
+.stop{
+    margin-top:10px;
+    background:#f44336;
+    padding:10px 25px;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px 5px;
+    padding:12px 20px;
+    background:#4CAF50;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+@media(max-width:600px){
+
+    header{
+        font-size:22px;
+    }
+
+    .title{
+        font-size:21px;
+    }
+
+    .dialogue-image{
+        border-radius:12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+🏫 At School
+<br>
+في المدرسة
+</header>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="title">
+            🏫 A Fun Day at School
+        </div>
+
+        <p>
+            استمع إلى الحوار وتعلم الإنجليزية بطريقة ممتعة.
+        </p>
+
+
+        <img
+            id="dialogueImage"
+            src="images/school_dialogue/scene_01.png"
+            alt="At School"
+            class="dialogue-image"
+        >
+
+
+        <div id="sceneNumber" class="scene">
+            Scene 1 / 15
+        </div>
+
+
+        <button
+            class="listen"
+            id="listenButton"
+            type="button"
+        >
+            🔊 Listen
+        </button>
+
+
+        <br>
+
+
+        <button
+            class="stop"
+            id="stopButton"
+            type="button"
+        >
+            ⏹️ Stop
+        </button>
+
+    </div>
+
+
+    <a
+        href="english.html"
+        class="back"
+    >
+        ⬅️ العودة إلى English
+    </a>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DIALOGUE
+===================================================== */
+
+const dialogue = [
+
+    "Good morning!",
+    "Good morning! Welcome to our school!",
+
+    "What is your name?",
+    "My name is Emma.",
+
+    "What class are you in?",
+    "I am in Class Two.",
+
+    "Where is our classroom?",
+    "It is upstairs.",
+
+    "What is this?",
+    "It is a school bag.",
+
+    "Do you have a pencil?",
+    "Yes, I have two pencils.",
+
+    "What are you drawing?",
+    "I am drawing a house.",
+
+    "Do you like English?",
+    "Yes! I love English!",
+
+    "What are we learning today?",
+    "We are learning numbers.",
+
+    "Can you count to ten?",
+    "Yes! One, two, three, four, five, six, seven, eight, nine, ten!",
+
+    "What do you do at break time?",
+    "I play with my friends.",
+
+    "Do you like the playground?",
+    "Yes! It is fun!",
+
+    "It is time to go home.",
+    "I had a great day at school!",
+
+    "See you tomorrow!",
+    "See you tomorrow! Goodbye!",
+
+    "I love my school!",
+    "Me too! Learning is fun!"
+
+];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let current = 0;
+
+let running = false;
+
+let timer = null;
+
+let safetyTimer = null;
+
+let session = 0;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const dialogueImage =
+    document.getElementById("dialogueImage");
+
+const sceneNumber =
+    document.getElementById("sceneNumber");
+
+const listenButton =
+    document.getElementById("listenButton");
+
+const stopButton =
+    document.getElementById("stopButton");
+
+
+/* =====================================================
+   PRELOAD ALL 15 IMAGES
+===================================================== */
+
+const preloadedImages = [];
+
+for(let i = 1; i <= 15; i++){
+
+    const img = new Image();
+
+    img.src =
+        "images/school_dialogue/scene_" +
+        String(i).padStart(2,"0") +
+        ".png";
+
+    preloadedImages.push(img);
+}
+
+
+/* =====================================================
+   SHOW SCENE
+===================================================== */
+
+function showScene(scene){
+
+    if(scene < 1){
+        scene = 1;
+    }
+
+    if(scene > 15){
+        scene = 15;
+    }
+
+    const number =
+        String(scene).padStart(2,"0");
+
+    const imagePath =
+        "images/school_dialogue/scene_" +
+        number +
+        ".png";
+
+    dialogueImage.src = imagePath;
+
+    sceneNumber.textContent =
+        "Scene " + scene + " / 15";
+}
+
+
+/* =====================================================
+   CANCEL TIMERS
+===================================================== */
+
+function clearAllTimers(){
+
+    if(timer !== null){
+
+        clearTimeout(timer);
+
+        timer = null;
+    }
+
+    if(safetyTimer !== null){
+
+        clearTimeout(safetyTimer);
+
+        safetyTimer = null;
+    }
+}
+
+
+/* =====================================================
+   START DIALOGUE
+===================================================== */
+
+function startDialogue(){
+
+    speechSynthesis.cancel();
+
+    clearAllTimers();
+
+    session++;
+
+    const mySession = session;
+
+    current = 0;
+
+    running = true;
+
+    showScene(1);
+
+
+    timer = setTimeout(function(){
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+        speakNext(mySession);
+
+    },500);
+
+}
+
+
+/* =====================================================
+   SPEAK NEXT
+===================================================== */
+
+function speakNext(mySession){
+
+    if(
+        !running ||
+        mySession !== session
+    ){
+        return;
+    }
+
+
+    /*
+       END OF DIALOGUE
+    */
+
+    if(current >= dialogue.length){
+
+        running = false;
+
+        return;
+    }
+
+
+    /*
+       ============================================
+       SCENE 10
+       ============================================
+       current 18 = question
+       current 19 = answer/counting
+    */
+
+
+    if(current === 19){
+
+        speakCounting(mySession);
+
+        return;
+    }
+
+
+    /*
+       NORMAL SCENES
+    */
+
+    const scene =
+        Math.floor(current / 2) + 1;
+
+    showScene(scene);
+
+
+    speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            dialogue[current]
+        );
+
+
+    speech.lang = "en-US";
+
+    speech.rate = 0.8;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    let finished = false;
+
+
+    function next(){
+
+        if(finished){
+            return;
+        }
+
+        finished = true;
+
+
+        if(safetyTimer !== null){
+
+            clearTimeout(safetyTimer);
+
+            safetyTimer = null;
+        }
+
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+
+        current++;
+
+
+        if(current >= dialogue.length){
+
+            running = false;
+
+            return;
+        }
+
+
+        timer = setTimeout(function(){
+
+            if(
+                mySession !== session ||
+                !running
+            ){
+                return;
+            }
+
+            speakNext(mySession);
+
+        },500);
+
+    }
+
+
+    speech.onend = function(){
+
+        next();
+
+    };
+
+
+    speech.onerror = function(){
+
+        next();
+
+    };
+
+
+    try{
+
+        speechSynthesis.resume();
+
+    }catch(e){}
+
+
+    speechSynthesis.speak(speech);
+
+
+    /*
+       SAFETY TIMER
+    */
+
+    safetyTimer = setTimeout(function(){
+
+        if(
+            mySession !== session ||
+            !running ||
+            finished
+        ){
+            return;
+        }
+
+        next();
+
+    },6500);
+
+}
+
+
+/* =====================================================
+   SCENE 10
+   COUNT FROM ONE TO TEN
+===================================================== */
+
+function speakCounting(mySession){
+
+    if(
+        !running ||
+        mySession !== session
+    ){
+        return;
+    }
+
+
+    /*
+       IMPORTANT:
+       Scene 10 stays on screen.
+    */
+
+    showScene(10);
+
+
+    /*
+       We divide the counting into TWO parts.
+       This prevents Android SpeechSynthesis
+       from cutting the final word "ten".
+    */
+
+
+    speakCountingPartOne(mySession);
+
+}
+
+
+/* =====================================================
+   COUNTING PART ONE
+   ONE → FIVE
+===================================================== */
+
+function speakCountingPartOne(mySession){
+
+    if(
+        !running ||
+        mySession !== session
+    ){
+        return;
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            "Yes! One, two, three, four, five!"
+        );
+
+
+    speech.lang = "en-US";
+
+    speech.rate = 0.8;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    let finished = false;
+
+
+    function nextPart(){
+
+        if(finished){
+            return;
+        }
+
+        finished = true;
+
+
+        if(safetyTimer !== null){
+
+            clearTimeout(safetyTimer);
+
+            safetyTimer = null;
+        }
+
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+
+        timer = setTimeout(function(){
+
+            if(
+                mySession !== session ||
+                !running
+            ){
+                return;
+            }
+
+            speakCountingPartTwo(mySession);
+
+        },400);
+
+    }
+
+
+    speech.onend = function(){
+
+        nextPart();
+
+    };
+
+
+    speech.onerror = function(){
+
+        nextPart();
+
+    };
+
+
+    try{
+
+        speechSynthesis.resume();
+
+    }catch(e){}
+
+
+    speechSynthesis.speak(speech);
+
+
+    /*
+       SAFETY TIMER
+    */
+
+    safetyTimer = setTimeout(function(){
+
+        if(
+            mySession !== session ||
+            !running ||
+            finished
+        ){
+            return;
+        }
+
+        nextPart();
+
+    },6500);
+
+}
+
+
+/* =====================================================
+   COUNTING PART TWO
+   SIX → TEN
+===================================================== */
+
+function speakCountingPartTwo(mySession){
+
+    if(
+        !running ||
+        mySession !== session
+    ){
+        return;
+    }
+
+
+    showScene(10);
+
+
+    speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            "Six, seven, eight, nine, ten!"
+        );
+
+
+    speech.lang = "en-US";
+
+    speech.rate = 0.8;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    let finished = false;
+
+
+    function finishCounting(){
+
+        if(finished){
+            return;
+        }
+
+        finished = true;
+
+
+        if(safetyTimer !== null){
+
+            clearTimeout(safetyTimer);
+
+            safetyTimer = null;
+        }
+
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+
+        /*
+           Scene 10 finished.
+
+           Scene 11 starts at index 20.
+        */
+
+        current = 20;
+
+
+        timer = setTimeout(function(){
+
+            if(
+                mySession !== session ||
+                !running
+            ){
+                return;
+            }
+
+            speakNext(mySession);
+
+        },700);
+
+    }
+
+
+    speech.onend = function(){
+
+        finishCounting();
+
+    };
+
+
+    speech.onerror = function(){
+
+        finishCounting();
+
+    };
+
+
+    try{
+
+        speechSynthesis.resume();
+
+    }catch(e){}
+
+
+    speechSynthesis.speak(speech);
+
+
+    /*
+       SAFETY TIMER
+    */
+
+    safetyTimer = setTimeout(function(){
+
+        if(
+            mySession !== session ||
+            !running ||
+            finished
+        ){
+            return;
+        }
+
+        finishCounting();
+
+    },6500);
+
+}
+
+
+/* =====================================================
+   STOP DIALOGUE
+===================================================== */
+
+function stopDialogue(){
+
+    session++;
+
+    running = false;
+
+    current = 0;
+
+    clearAllTimers();
+
+    speechSynthesis.cancel();
+
+
+    try{
+
+        speechSynthesis.pause();
+
+    }catch(e){}
+
+
+    showScene(1);
+
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+/*
+   We use addEventListener instead of
+   onclick="startDialogue()"
+
+   This avoids:
+   "startDialogue is not defined"
+*/
+
+listenButton.addEventListener(
+    "click",
+    startDialogue
+);
+
+
+stopButton.addEventListener(
+    "click",
+    stopDialogue
+);
+
+
+/* =====================================================
+   INITIAL SCENE
+===================================================== */
+
+showScene(1);
+
+</script>
+
+</body>
+
+</html>

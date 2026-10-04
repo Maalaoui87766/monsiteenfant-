@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Fruits | الفواكه بالإنجليزية</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f5f7fa;
+    font-family:Tahoma,Arial,sans-serif;
+    text-align:center;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:18px 10px;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.intro{
+    background:white;
+    margin:15px 10px;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.intro h2{
+    margin:0 0 8px;
+    color:#4CAF50;
+}
+
+.intro p{
+    margin:0;
+    color:#555;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    padding:10px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:18px 8px;
+    box-shadow:0 2px 6px #ccc;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.card:active{
+    transform:scale(.97);
+}
+
+.emoji{
+    font-size:50px;
+    margin-bottom:8px;
+}
+
+.english{
+    font-size:23px;
+    font-weight:bold;
+    color:#2196F3;
+    direction:ltr;
+}
+
+.arabic{
+    margin-top:7px;
+    font-size:17px;
+    color:#555;
+}
+
+.speak{
+    margin-top:10px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:8px 16px;
+    font-size:15px;
+}
+
+.back{
+    display:inline-block;
+    margin:15px 5px 30px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+@media(max-width:380px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🍎 English Fruits 🍓
+</header>
+
+<div class="intro">
+
+<h2>🍎 الفواكه</h2>
+
+<p>
+اضغط على الفاكهة لسماع نطقها باللغة الإنجليزية 🔊
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card" onclick="speakEnglish('Apple')">
+    <div class="emoji">🍎</div>
+    <div class="english">Apple</div>
+    <div class="arabic">تفاحة</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Banana')">
+    <div class="emoji">🍌</div>
+    <div class="english">Banana</div>
+    <div class="arabic">موزة</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Orange')">
+    <div class="emoji">🍊</div>
+    <div class="english">Orange</div>
+    <div class="arabic">برتقالة</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Strawberry')">
+    <div class="emoji">🍓</div>
+    <div class="english">Strawberry</div>
+    <div class="arabic">فراولة</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Grape')">
+    <div class="emoji">🍇</div>
+    <div class="english">Grape</div>
+    <div class="arabic">عنب</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Watermelon')">
+    <div class="emoji">🍉</div>
+    <div class="english">Watermelon</div>
+    <div class="arabic">بطيخ</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Pineapple')">
+    <div class="emoji">🍍</div>
+    <div class="english">Pineapple</div>
+    <div class="arabic">أناناس</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Peach')">
+    <div class="emoji">🍑</div>
+    <div class="english">Peach</div>
+    <div class="arabic">خوخ</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Pear')">
+    <div class="emoji">🍐</div>
+    <div class="english">Pear</div>
+    <div class="arabic">كمثرى</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Lemon')">
+    <div class="emoji">🍋</div>
+    <div class="english">Lemon</div>
+    <div class="arabic">ليمون</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+</div>
+
+<a href="english.html" class="back">
+⬅️ English
+</a>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

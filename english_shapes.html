@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>English Shapes | الأشكال بالإنجليزية</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#f5f7fa;
+    font-family:Tahoma,Arial,sans-serif;
+    text-align:center;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:18px 10px;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.intro{
+    background:white;
+    margin:15px 10px;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.intro h2{
+    margin:0 0 8px;
+    color:#4CAF50;
+}
+
+.intro p{
+    margin:0;
+    color:#555;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    padding:10px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:18px 8px;
+    box-shadow:0 2px 6px #ccc;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.card:active{
+    transform:scale(.97);
+}
+
+.shape{
+    font-size:55px;
+    margin-bottom:8px;
+}
+
+.english{
+    font-size:23px;
+    font-weight:bold;
+    color:#2196F3;
+    direction:ltr;
+}
+
+.arabic{
+    margin-top:7px;
+    font-size:17px;
+    color:#555;
+}
+
+.speak{
+    margin-top:10px;
+    background:#4CAF50;
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:8px 16px;
+    font-size:15px;
+}
+
+.back{
+    display:inline-block;
+    margin:15px 5px 30px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+@media(max-width:380px){
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🔷 English Shapes 🔷
+</header>
+
+<div class="intro">
+
+<h2>🔷 الأشكال</h2>
+
+<p>
+اضغط على الشكل لسماع اسمه باللغة الإنجليزية 🔊
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card" onclick="speakEnglish('Circle')">
+    <div class="shape">⭕</div>
+    <div class="english">Circle</div>
+    <div class="arabic">دائرة</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Square')">
+    <div class="shape">⬜</div>
+    <div class="english">Square</div>
+    <div class="arabic">مربع</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Triangle')">
+    <div class="shape">🔺</div>
+    <div class="english">Triangle</div>
+    <div class="arabic">مثلث</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Rectangle')">
+    <div class="shape">▭</div>
+    <div class="english">Rectangle</div>
+    <div class="arabic">مستطيل</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Star')">
+    <div class="shape">⭐</div>
+    <div class="english">Star</div>
+    <div class="arabic">نجمة</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Heart')">
+    <div class="shape">❤️</div>
+    <div class="english">Heart</div>
+    <div class="arabic">قلب</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Diamond')">
+    <div class="shape">🔷</div>
+    <div class="english">Diamond</div>
+    <div class="arabic">مُعين</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+<div class="card" onclick="speakEnglish('Oval')">
+    <div class="shape">🥚</div>
+    <div class="english">Oval</div>
+    <div class="arabic">شكل بيضاوي</div>
+    <button class="speak">🔊 Listen</button>
+</div>
+
+</div>
+
+<a href="english.html" class="back">
+⬅️ English
+</a>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

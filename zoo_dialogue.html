@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>At the Zoo | أكاديمية الطفل الذكي</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    text-align:center;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px 10px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin-top:20px;
+    padding:15px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.title{
+    font-size:25px;
+    color:#2196F3;
+    margin-bottom:15px;
+}
+
+.dialogue-image{
+    width:100%;
+    max-width:1000px;
+    border-radius:15px;
+    display:block;
+    margin:10px auto;
+    background:#eee;
+}
+
+.scene{
+    margin-top:10px;
+    font-size:18px;
+    color:#777;
+    font-weight:bold;
+}
+
+button{
+    border:none;
+    color:white;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+.listen{
+    margin-top:20px;
+    background:#2196F3;
+    padding:13px 30px;
+    font-size:20px;
+}
+
+.stop{
+    margin-top:10px;
+    background:#f44336;
+    padding:10px 25px;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px 5px;
+    padding:12px 20px;
+    background:#4CAF50;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+🦁 At the Zoo
+<br>
+حديقة الحيوانات
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<div class="title">
+🦁 A Fun Day at the Zoo
+</div>
+
+<p>
+استمع إلى الحوار وتعلم الإنجليزية بطريقة ممتعة.
+</p>
+
+
+<img
+    id="dialogueImage"
+    src="images/zoo_dialogue/scene_01.png"
+    alt="At the Zoo"
+    class="dialogue-image"
+>
+
+
+<div id="sceneNumber" class="scene">
+Scene 1 / 15
+</div>
+
+
+<button
+    class="listen"
+    onclick="startDialogue()"
+>
+🔊 Listen
+</button>
+
+<br>
+
+
+<button
+    class="stop"
+    onclick="stopDialogue()"
+>
+⏹️ Stop
+</button>
+
+
+</div>
+
+
+<a
+    href="english.html"
+    class="back"
+>
+⬅️ العودة إلى English
+</a>
+
+</div>
+
+
+
+<script>
+
+/* ==============================
+   الحوار
+============================== */
+
+const dialogue = [
+
+"Look! We are at the zoo!",
+"Yes! I love animals!",
+
+"What animal is that?",
+"It's a big lion!",
+
+"The lion is very strong.",
+"Yes, but we must stay behind the fence.",
+
+"Look at the elephant!",
+"Wow! It has a long trunk!",
+
+"What is the elephant doing?",
+"It is drinking water.",
+
+"Look up! I see a giraffe.",
+"It has a very long neck!",
+
+"What are those monkeys doing?",
+"They are jumping and playing!",
+
+"I like the colorful birds.",
+"Me too! Listen to them sing.",
+
+"Can you see the zebra?",
+"Yes! It has black and white stripes.",
+
+"Look at the little penguins!",
+"They are swimming!",
+
+"Which animal do you like best?",
+"I like the elephant best.",
+
+"I like the lion best.",
+"They are all wonderful!",
+
+"I am getting hungry.",
+"Let's have a snack.",
+
+"I had a great day at the zoo!",
+"Me too! I learned many new things.",
+
+"See you next time, animals!",
+"Goodbye, zoo! See you again!"
+
+];
+
+
+/* ==============================
+   المتغيرات
+============================== */
+
+let current = 0;
+
+let running = false;
+
+let timer = null;
+
+let safetyTimer = null;
+
+let session = 0;
+
+
+/* ==============================
+   عناصر الصفحة
+============================== */
+
+const dialogueImage =
+    document.getElementById("dialogueImage");
+
+const sceneNumber =
+    document.getElementById("sceneNumber");
+
+
+/* ==============================
+   تحميل الصور مسبقاً
+============================== */
+
+const preloadedImages = [];
+
+for(let i = 1; i <= 15; i++){
+
+    const img = new Image();
+
+    img.src =
+        "images/zoo_dialogue/scene_" +
+        String(i).padStart(2,"0") +
+        ".png";
+
+    preloadedImages.push(img);
+}
+
+
+/* ==============================
+   عرض الصورة
+============================== */
+
+function showScene(scene){
+
+    if(scene < 1){
+        scene = 1;
+    }
+
+    if(scene > 15){
+        scene = 15;
+    }
+
+
+    const number =
+        String(scene).padStart(2,"0");
+
+
+    const imagePath =
+        "images/zoo_dialogue/scene_" +
+        number +
+        ".png";
+
+
+    /*
+       نضع الصورة مباشرة.
+       لا ننتظر onload.
+       الصور تم تحميلها مسبقاً.
+    */
+
+    dialogueImage.src = imagePath;
+
+
+    sceneNumber.textContent =
+        "Scene " + scene + " / 15";
+}
+
+
+/* ==============================
+   بدء الحوار
+============================== */
+
+function startDialogue(){
+
+    /*
+       إيقاف أي حوار سابق
+    */
+
+    speechSynthesis.cancel();
+
+
+    if(timer !== null){
+
+        clearTimeout(timer);
+
+        timer = null;
+    }
+
+
+    if(safetyTimer !== null){
+
+        clearTimeout(safetyTimer);
+
+        safetyTimer = null;
+    }
+
+
+    /*
+       جلسة جديدة
+    */
+
+    session++;
+
+    const mySession = session;
+
+
+    current = 0;
+
+    running = true;
+
+
+    showScene(1);
+
+
+    /*
+       إعطاء الهاتف وقتاً صغيراً
+    */
+
+    timer = setTimeout(function(){
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+        speakNext(mySession);
+
+    },500);
+}
+
+
+/* ==============================
+   نطق الجملة التالية
+============================== */
+
+function speakNext(mySession){
+
+    if(
+        !running ||
+        mySession !== session
+    ){
+        return;
+    }
+
+
+    /*
+       نهاية الحوار
+    */
+
+    if(current >= dialogue.length){
+
+        running = false;
+
+        return;
+    }
+
+
+    /*
+       تحديد رقم المشهد
+    */
+
+    const scene =
+        Math.floor(current / 2) + 1;
+
+
+    showScene(scene);
+
+
+    /*
+       إلغاء أي نطق عالق
+    */
+
+    speechSynthesis.cancel();
+
+
+    /*
+       إنشاء الجملة
+    */
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            dialogue[current]
+        );
+
+
+    speech.lang = "en-US";
+
+    speech.rate = 0.8;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    let finished = false;
+
+
+    /* ==========================
+       الانتقال للجملة التالية
+    ========================== */
+
+    function next(){
+
+        if(finished){
+            return;
+        }
+
+        finished = true;
+
+
+        if(safetyTimer !== null){
+
+            clearTimeout(safetyTimer);
+
+            safetyTimer = null;
+        }
+
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+
+        current++;
+
+
+        /*
+           نهاية الحوار
+        */
+
+        if(current >= dialogue.length){
+
+            running = false;
+
+            return;
+        }
+
+
+        /*
+           الانتقال بعد نصف ثانية
+        */
+
+        timer = setTimeout(function(){
+
+            if(
+                mySession !== session ||
+                !running
+            ){
+                return;
+            }
+
+            speakNext(mySession);
+
+        },500);
+    }
+
+
+    /* ==========================
+       عند انتهاء الصوت
+    ========================== */
+
+    speech.onend = function(){
+
+        next();
+
+    };
+
+
+    /* ==========================
+       عند حدوث خطأ
+    ========================== */
+
+    speech.onerror = function(){
+
+        next();
+
+    };
+
+
+    /*
+       مهم جداً في Android
+    */
+
+    try{
+
+        speechSynthesis.resume();
+
+    }catch(e){}
+
+
+    /*
+       تشغيل الصوت
+    */
+
+    speechSynthesis.speak(speech);
+
+
+    /* =================================================
+       مؤقت أمان
+
+       إذا Android لم يرسل onend،
+       لن يبقى الحوار متوقفاً.
+
+       هذا هو الإصلاح المهم للمشكلة عند Scene 12.
+    ================================================= */
+
+    safetyTimer = setTimeout(function(){
+
+        if(
+            mySession !== session ||
+            !running ||
+            finished
+        ){
+            return;
+        }
+
+
+        next();
+
+    },6500);
+
+}
+
+
+/* ==============================
+   زر STOP
+============================== */
+
+function stopDialogue(){
+
+    /*
+       إلغاء الجلسة الحالية
+    */
+
+    session++;
+
+
+    running = false;
+
+
+    current = 0;
+
+
+    /*
+       إلغاء المؤقت
+    */
+
+    if(timer !== null){
+
+        clearTimeout(timer);
+
+        timer = null;
+    }
+
+
+    if(safetyTimer !== null){
+
+        clearTimeout(safetyTimer);
+
+        safetyTimer = null;
+    }
+
+
+    /*
+       إيقاف الصوت
+    */
+
+    speechSynthesis.cancel();
+
+
+    try{
+
+        speechSynthesis.pause();
+
+    }catch(e){}
+
+
+    /*
+       العودة للصورة الأولى
+    */
+
+    showScene(1);
+}
+
+
+/* ==============================
+   الصورة الأولى عند فتح الصفحة
+============================== */
+
+showScene(1);
+
+</script>
+
+</body>
+</html>

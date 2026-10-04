@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transport | English</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin:12px auto;
+    padding:20px;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.emoji{
+    font-size:50px;
+}
+
+.english{
+    font-size:28px;
+    font-weight:bold;
+    color:#2196F3;
+    margin-top:8px;
+}
+
+.arabic{
+    font-size:20px;
+    color:#555;
+    margin-top:6px;
+}
+
+.speak{
+    margin-top:12px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+🚗 Transport
+</header>
+
+<div class="container">
+
+<div class="card">
+    <div class="emoji">🚗</div>
+    <div class="english">Car</div>
+    <div class="arabic">سيارة</div>
+    <button class="speak" onclick="speakEnglish('Car')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚌</div>
+    <div class="english">Bus</div>
+    <div class="arabic">حافلة</div>
+    <button class="speak" onclick="speakEnglish('Bus')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚆</div>
+    <div class="english">Train</div>
+    <div class="arabic">قطار</div>
+    <button class="speak" onclick="speakEnglish('Train')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">✈️</div>
+    <div class="english">Airplane</div>
+    <div class="arabic">طائرة</div>
+    <button class="speak" onclick="speakEnglish('Airplane')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚢</div>
+    <div class="english">Ship</div>
+    <div class="arabic">سفينة</div>
+    <button class="speak" onclick="speakEnglish('Ship')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚲</div>
+    <div class="english">Bicycle</div>
+    <div class="arabic">دراجة</div>
+    <button class="speak" onclick="speakEnglish('Bicycle')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🏍️</div>
+    <div class="english">Motorcycle</div>
+    <div class="arabic">دراجة نارية</div>
+    <button class="speak" onclick="speakEnglish('Motorcycle')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚕</div>
+    <div class="english">Taxi</div>
+    <div class="arabic">سيارة أجرة</div>
+    <button class="speak" onclick="speakEnglish('Taxi')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚑</div>
+    <div class="english">Ambulance</div>
+    <div class="arabic">سيارة إسعاف</div>
+    <button class="speak" onclick="speakEnglish('Ambulance')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚒</div>
+    <div class="english">Fire Truck</div>
+    <div class="arabic">شاحنة إطفاء</div>
+    <button class="speak" onclick="speakEnglish('Fire Truck')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚁</div>
+    <div class="english">Helicopter</div>
+    <div class="arabic">مروحية</div>
+    <button class="speak" onclick="speakEnglish('Helicopter')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🚀</div>
+    <div class="english">Rocket</div>
+    <div class="arabic">صاروخ</div>
+    <button class="speak" onclick="speakEnglish('Rocket')">
+        🔊 Listen
+    </button>
+</div>
+
+<a href="english.html" class="back">
+⬅️ Back to English
+</a>
+
+</div>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

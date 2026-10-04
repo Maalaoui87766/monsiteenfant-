@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Getting to Know Each Other | أكاديمية الطفل الذكي</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    text-align:center;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px 10px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin-top:20px;
+    padding:15px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.title{
+    font-size:25px;
+    color:#2196F3;
+    margin-bottom:15px;
+}
+
+.dialogue-image{
+    width:100%;
+    max-width:1000px;
+    border-radius:15px;
+    display:block;
+    margin:10px auto;
+    background:#eee;
+}
+
+.listen{
+    margin-top:20px;
+    background:#2196F3;
+    color:white;
+    border:none;
+    border-radius:25px;
+    padding:13px 30px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.listen:active{
+    transform:scale(.97);
+}
+
+.stop{
+    margin-top:10px;
+    background:#f44336;
+    color:white;
+    border:none;
+    border-radius:25px;
+    padding:10px 25px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.stop:active{
+    transform:scale(.97);
+}
+
+.back{
+    display:inline-block;
+    margin:20px 5px;
+    padding:12px 20px;
+    background:#4CAF50;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+.info{
+    font-size:17px;
+    line-height:1.8;
+    color:#555;
+}
+
+.scene{
+    margin-top:10px;
+    font-size:18px;
+    color:#777;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+🎬 English Conversation
+
+<br>
+
+التعارف باللغة الإنجليزية
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<div class="title">
+
+👧🧒 Getting to Know Each Other
+
+</div>
+
+
+<p class="info">
+
+استمع إلى الحوار وتعلم كيف تتعرف على شخص جديد باللغة الإنجليزية.
+
+</p>
+
+
+<img
+id="dialogueImage"
+src="./images/dialogue/scene_01.png"
+alt="Getting to Know Each Other"
+class="dialogue-image">
+
+
+<div id="sceneNumber" class="scene">
+
+Scene 1 / 15
+
+</div>
+
+
+<button
+class="listen"
+onclick="startDialogue()">
+
+🔊 Listen
+
+</button>
+
+
+<br>
+
+
+<button
+class="stop"
+onclick="stopDialogue()">
+
+⏹️ Stop
+
+</button>
+
+</div>
+
+
+<a
+href="english.html"
+class="back">
+
+⬅️ العودة إلى English
+
+</a>
+
+</div>
+
+
+<script>
+
+const dialogue = [
+
+    "What is your name?",
+    "My name is Adam.",
+
+    "How old are you?",
+    "I am seven years old.",
+
+    "Where are you from?",
+    "I am from Tunisia.",
+
+    "What do you like to do?",
+    "I like to play and read.",
+
+    "What do you have for breakfast?",
+    "I have bread, milk and an egg.",
+
+    "What is your favorite food?",
+    "My favorite food is pizza.",
+
+    "What is your favorite color?",
+    "My favorite color is blue.",
+
+    "Do you have a brother or sister?",
+    "Yes, I have one brother.",
+
+    "What is your favorite animal?",
+    "I like cats.",
+
+    "What do you want to be when you grow up?",
+    "I want to be a doctor.",
+
+    "What do you do at school?",
+    "I learn English and math.",
+
+    "What do you do after school?",
+    "I play with my friends.",
+
+    "What is your favorite game?",
+    "My favorite game is football.",
+
+    "What time do you go to bed?",
+    "I go to bed at nine o'clock.",
+
+    "Nice to meet you!",
+    "Nice to meet you too!"
+
+];
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let current = 0;
+let running = false;
+
+let timer = null;
+
+/*
+   يحمي الصوت القديم
+*/
+let session = 0;
+
+/*
+   يحمي الصورة من التحميل القديم
+*/
+let imageRequest = 0;
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const dialogueImage =
+    document.getElementById("dialogueImage");
+
+const sceneNumber =
+    document.getElementById("sceneNumber");
+
+
+/* =========================
+   CHANGE IMAGE
+========================= */
+
+function showScene(scene){
+
+    /*
+       رقم جديد لكل طلب صورة
+    */
+
+    imageRequest++;
+
+    const thisRequest = imageRequest;
+
+
+    const number =
+        String(scene).padStart(2, "0");
+
+
+    const imagePath =
+        "./images/dialogue/scene_" +
+        number +
+        ".png";
+
+
+    /*
+       نحمّل الصورة الجديدة
+    */
+
+    const newImage = new Image();
+
+
+    newImage.onload = function(){
+
+        /*
+           إذا كانت هذه صورة قديمة
+           نتجاهلها
+        */
+
+        if(thisRequest !== imageRequest){
+
+            return;
+
+        }
+
+
+        /*
+           وضع الصورة الصحيحة
+        */
+
+        dialogueImage.src = imagePath;
+
+
+        /*
+           تحديث رقم المشهد
+        */
+
+        sceneNumber.textContent =
+            "Scene " + scene + " / 15";
+
+    };
+
+
+    newImage.onerror = function(){
+
+        console.log(
+            "Image error: " + imagePath
+        );
+
+    };
+
+
+    newImage.src = imagePath;
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+function startDialogue(){
+
+    /*
+       إيقاف أي صوت سابق
+    */
+
+    speechSynthesis.cancel();
+
+
+    /*
+       إلغاء أي مؤقت سابق
+    */
+
+    if(timer !== null){
+
+        clearTimeout(timer);
+
+        timer = null;
+
+    }
+
+
+    /*
+       جلسة جديدة
+    */
+
+    session++;
+
+    const mySession = session;
+
+
+    current = 0;
+
+    running = true;
+
+
+    /*
+       Scene 1
+    */
+
+    showScene(1);
+
+
+    /*
+       بداية الصوت
+    */
+
+    timer = setTimeout(function(){
+
+        if(mySession !== session){
+
+            return;
+
+        }
+
+
+        if(!running){
+
+            return;
+
+        }
+
+
+        speakNext(mySession);
+
+    },300);
+
+}
+
+
+/* =========================
+   SPEAK NEXT
+========================= */
+
+function speakNext(mySession){
+
+    if(!running){
+
+        return;
+
+    }
+
+
+    if(mySession !== session){
+
+        return;
+
+    }
+
+
+    if(current >= dialogue.length){
+
+        running = false;
+
+        return;
+
+    }
+
+
+    /*
+       تحديد المشهد
+
+       0 + 1   = 1
+       2 + 3   = 2
+       4 + 5   = 3
+       6 + 7   = 4
+       8 + 9   = 5
+       ...
+    */
+
+    const scene =
+        Math.floor(current / 2) + 1;
+
+
+    /*
+       تغيير الصورة
+       قبل تشغيل الجملة
+    */
+
+    showScene(scene);
+
+
+    /*
+       الجملة
+    */
+
+    const text =
+        dialogue[current];
+
+
+    const speech =
+        new SpeechSynthesisUtterance(text);
+
+
+    speech.lang = "en-US";
+
+    speech.rate = 0.8;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    let finished = false;
+
+
+    /* =========================
+       SPEECH END
+    ========================= */
+
+    speech.onend = function(){
+
+        if(finished){
+
+            return;
+
+        }
+
+
+        finished = true;
+
+
+        /*
+           تجاهل الصوت القديم
+        */
+
+        if(mySession !== session){
+
+            return;
+
+        }
+
+
+        if(!running){
+
+            return;
+
+        }
+
+
+        /*
+           الجملة التالية
+        */
+
+        current++;
+
+
+        if(current < dialogue.length){
+
+            timer = setTimeout(function(){
+
+                if(mySession !== session){
+
+                    return;
+
+                }
+
+
+                if(!running){
+
+                    return;
+
+                }
+
+
+                speakNext(mySession);
+
+            },500);
+
+        }
+        else{
+
+            running = false;
+
+        }
+
+    };
+
+
+    /* =========================
+       SPEECH ERROR
+    ========================= */
+
+    speech.onerror = function(){
+
+        if(mySession !== session){
+
+            return;
+
+        }
+
+
+        finished = true;
+
+        running = false;
+
+    };
+
+
+    /*
+       تشغيل الصوت
+    */
+
+    speechSynthesis.speak(speech);
+
+}
+
+
+/* =========================
+   STOP
+========================= */
+
+function stopDialogue(){
+
+    /*
+       إلغاء كل جلسة صوت قديمة
+    */
+
+    session++;
+
+
+    /*
+       إلغاء كل طلب صورة قديم
+    */
+
+    imageRequest++;
+
+
+    running = false;
+
+
+    current = 0;
+
+
+    /*
+       إلغاء المؤقت
+    */
+
+    if(timer !== null){
+
+        clearTimeout(timer);
+
+        timer = null;
+
+    }
+
+
+    /*
+       إيقاف الصوت
+    */
+
+    speechSynthesis.cancel();
+
+
+    /*
+       العودة إلى Scene 1
+    */
+
+    showScene(1);
+
+}
+
+
+/* =========================
+   INITIAL SCENE
+========================= */
+
+showScene(1);
+
+</script>
+
+
+
+
+
+    
+
+
+
+</body>
+
+</html>

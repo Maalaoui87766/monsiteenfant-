@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Seasons | English</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin:12px auto;
+    padding:20px;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.emoji{
+    font-size:50px;
+}
+
+.english{
+    font-size:28px;
+    font-weight:bold;
+    color:#2196F3;
+    margin-top:8px;
+}
+
+.arabic{
+    font-size:20px;
+    color:#555;
+    margin-top:6px;
+}
+
+.speak{
+    margin-top:12px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:10px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<header>
+🌸 Seasons
+</header>
+
+<div class="container">
+
+<div class="card">
+    <div class="emoji">🌸</div>
+    <div class="english">Spring</div>
+    <div class="arabic">الربيع</div>
+    <button class="speak" onclick="speakEnglish('Spring')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">☀️</div>
+    <div class="english">Summer</div>
+    <div class="arabic">الصيف</div>
+    <button class="speak" onclick="speakEnglish('Summer')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">🍂</div>
+    <div class="english">Autumn</div>
+    <div class="arabic">الخريف</div>
+    <button class="speak" onclick="speakEnglish('Autumn')">
+        🔊 Listen
+    </button>
+</div>
+
+<div class="card">
+    <div class="emoji">❄️</div>
+    <div class="english">Winter</div>
+    <div class="arabic">الشتاء</div>
+    <button class="speak" onclick="speakEnglish('Winter')">
+        🔊 Listen
+    </button>
+</div>
+
+
+
+<br>
+
+<a href="english.html" class="back">
+⬅️ Back to English
+</a>
+
+</div>
+
+<script>
+
+function speakEnglish(text){
+
+    if("speechSynthesis" in window){
+
+        speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+
+    }else{
+
+        alert("Speech is not available in this browser.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

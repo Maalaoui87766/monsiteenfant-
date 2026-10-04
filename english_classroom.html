@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Classroom | English</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    text-align:center;
+    color:#333;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin:12px auto;
+    padding:20px;
+    max-width:400px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.emoji{
+    font-size:50px;
+}
+
+.english{
+    font-size:28px;
+    font-weight:bold;
+    color:#2196F3;
+    margin-top:8px;
+}
+
+.arabic{
+    font-size:20px;
+    color:#555;
+    margin-top:6px;
+}
+
+.speak{
+    margin-top:12px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    font-size:17px;
+}
+
+.back{
+    display:inline-block;
+    margin:20px;
+    padding:12px 20px;
+    background:#2196F3;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+</style>
+</head>
+
+<body>
+
+<header>🏫 Classroom</header>
+
+<div class="container">
+
+<div class="card">
+    <div class="emoji">🪑</div>
+    <div class="english">Chair</div>
+    <div class="arabic">كرسي</div>
+    <button class="speak" onclick="speakEnglish('Chair')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">🧑‍🏫</div>
+    <div class="english">Teacher</div>
+    <div class="arabic">معلّم / معلّمة</div>
+    <button class="speak" onclick="speakEnglish('Teacher')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">👨‍🎓</div>
+    <div class="english">Student</div>
+    <div class="arabic">تلميذ / تلميذة</div>
+    <button class="speak" onclick="speakEnglish('Student')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">📚</div>
+    <div class="english">Book</div>
+    <div class="arabic">كتاب</div>
+    <button class="speak" onclick="speakEnglish('Book')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">✏️</div>
+    <div class="english">Pencil</div>
+    <div class="arabic">قلم رصاص</div>
+    <button class="speak" onclick="speakEnglish('Pencil')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">🖊️</div>
+    <div class="english">Pen</div>
+    <div class="arabic">قلم</div>
+    <button class="speak" onclick="speakEnglish('Pen')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">📓</div>
+    <div class="english">Notebook</div>
+    <div class="arabic">دفتر</div>
+    <button class="speak" onclick="speakEnglish('Notebook')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">📏</div>
+    <div class="english">Ruler</div>
+    <div class="arabic">مسطرة</div>
+    <button class="speak" onclick="speakEnglish('Ruler')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">✂️</div>
+    <div class="english">Scissors</div>
+    <div class="arabic">مقص</div>
+    <button class="speak" onclick="speakEnglish('Scissors')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">🧴</div>
+    <div class="english">Glue</div>
+    <div class="arabic">غراء</div>
+    <button class="speak" onclick="speakEnglish('Glue')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">🎨</div>
+    <div class="english">Crayon</div>
+    <div class="arabic">قلم تلوين</div>
+    <button class="speak" onclick="speakEnglish('Crayon')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">🧑‍💻</div>
+    <div class="english">Computer</div>
+    <div class="arabic">حاسوب</div>
+    <button class="speak" onclick="speakEnglish('Computer')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">🖥️</div>
+    <div class="english">Screen</div>
+    <div class="arabic">شاشة</div>
+    <button class="speak" onclick="speakEnglish('Screen')">🔊 Listen</button>
+</div>
+
+<div class="card">
+    <div class="emoji">🧑‍🤝‍🧑</div>
+    <div class="english">Classmates</div>
+    <div class="arabic">زملاء القسم</div>
+    <button class="speak" onclick="speakEnglish('Classmates')">🔊 Listen</button>
+</div>
+
+<a href="english.html" class="back">⬅️ Back to English</a>
+
+</div>
+
+<script>
+function speakEnglish(text){
+    if("speechSynthesis" in window){
+        speechSynthesis.cancel();
+
+        const speech = new SpeechSynthesisUtterance(text);
+
+        speech.lang = "en-US";
+        speech.rate = 0.8;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+    }else{
+        alert("Speech is not available in this browser.");
+    }
+}
+</script>
+
+</body>
+</html>
