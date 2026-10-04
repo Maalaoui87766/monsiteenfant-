@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>At the Birthday Party | أكاديمية الطفل الذكي</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7fa;
+    color:#333;
+    text-align:center;
+}
+
+header{
+    background:#4CAF50;
+    color:white;
+    padding:20px 10px;
+    font-size:24px;
+    font-weight:bold;
+    line-height:1.6;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    margin-top:20px;
+    padding:15px;
+    border-radius:20px;
+    box-shadow:0 2px 6px #ccc;
+}
+
+.title{
+    font-size:25px;
+    color:#2196F3;
+    margin-bottom:15px;
+}
+
+.description{
+    font-size:17px;
+    line-height:1.8;
+}
+
+.dialogue-image{
+    width:100%;
+    max-width:1000px;
+    border-radius:15px;
+    display:block;
+    margin:15px auto;
+    background:#eee;
+}
+
+.scene{
+    margin-top:10px;
+    font-size:18px;
+    color:#777;
+    font-weight:bold;
+}
+
+button{
+    border:none;
+    color:white;
+    border-radius:25px;
+    cursor:pointer;
+    font-family:Tahoma,Arial,sans-serif;
+    -webkit-tap-highlight-color:transparent;
+}
+
+.listen{
+    margin-top:20px;
+    background:#2196F3;
+    padding:13px 30px;
+    font-size:20px;
+}
+
+.stop{
+    margin-top:10px;
+    background:#f44336;
+    padding:10px 25px;
+    font-size:17px;
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+.back{
+    display:inline-block;
+    margin:20px 5px;
+    padding:12px 20px;
+    background:#4CAF50;
+    color:white;
+    text-decoration:none;
+    border-radius:20px;
+    font-size:17px;
+}
+
+@media(max-width:600px){
+
+    header{
+        font-size:21px;
+        padding:17px 8px;
+    }
+
+    .container{
+        padding:10px;
+    }
+
+    .card{
+        padding:10px;
+        margin-top:10px;
+    }
+
+    .title{
+        font-size:21px;
+    }
+
+    .description{
+        font-size:15px;
+    }
+
+    .dialogue-image{
+        border-radius:12px;
+    }
+
+    .scene{
+        font-size:16px;
+    }
+
+    .listen{
+        font-size:18px;
+        padding:12px 25px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+🎂 At the Birthday Party
+<br>
+حفل عيد الميلاد
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<div class="title">
+🎈 A Fun Birthday Party
+</div>
+
+<p class="description">
+استمع إلى الحوار وتعلم الإنجليزية بطريقة ممتعة.
+</p>
+
+
+<img
+id="dialogueImage"
+src="images/birthday_dialogue/scene_01.png"
+alt="At the Birthday Party"
+class="dialogue-image"
+>
+
+
+<div id="sceneNumber" class="scene">
+Scene 1 / 15
+</div>
+
+
+<button class="listen" onclick="startDialogue()">
+🔊 Listen
+</button>
+
+<br>
+
+<button class="stop" onclick="stopDialogue()">
+⏹️ Stop
+</button>
+
+</div>
+
+
+<a href="english.html" class="back">
+⬅️ العودة إلى English
+</a>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DIALOGUE
+========================= */
+
+const dialogue = [
+
+"Happy birthday, Liam!",
+"Thank you, Maya! Come in!",
+
+"This is for you.",
+"Wow! Thank you! It's a nice gift!",
+
+"Can I have some cake?",
+"Yes, of course! Here you are.",
+
+"This cake is delicious!",
+"I'm glad you like it!",
+
+"Do you want some juice?",
+"Yes, please! I'm thirsty.",
+
+"Let's play a game!",
+"Great idea! This is fun!",
+
+"What is this?",
+"It's a teddy bear!",
+
+"It was a great party!",
+"Yes, it was! See you later!",
+
+"I love my teddy bear!",
+"Me too! It's so cute!",
+
+"This card is beautiful!",
+"It's from your friends.",
+
+"I like the balloons!",
+"They are so colorful!",
+
+"I had a wonderful day!",
+"Me too! Happy birthday again!",
+
+"I'm so happy today!",
+"Sweet dreams!",
+
+"It was the best birthday ever!",
+"Yes, it was!",
+
+"The End!",
+"Great job!"
+
+];
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let current = 0;
+
+let running = false;
+
+let timer = null;
+
+let session = 0;
+
+let imageRequest = 0;
+
+
+const dialogueImage =
+document.getElementById("dialogueImage");
+
+const sceneNumber =
+document.getElementById("sceneNumber");
+
+
+/* =========================
+   SHOW SCENE
+========================= */
+
+function showScene(scene){
+
+    imageRequest++;
+
+    const request = imageRequest;
+
+    const number =
+        String(scene).padStart(2,"0");
+
+    const imagePath =
+        "images/birthday_dialogue/scene_" +
+        number +
+        ".png";
+
+
+    const newImage = new Image();
+
+
+    newImage.onload = function(){
+
+        if(request !== imageRequest){
+            return;
+        }
+
+        dialogueImage.src = imagePath;
+
+        sceneNumber.textContent =
+            "Scene " + scene + " / 15";
+    };
+
+
+    newImage.onerror = function(){
+
+        console.log(
+            "Image error: " + imagePath
+        );
+
+    };
+
+
+    newImage.src = imagePath;
+}
+
+
+/* =========================
+   START DIALOGUE
+========================= */
+
+function startDialogue(){
+
+    /* Stop previous speech */
+
+    speechSynthesis.cancel();
+
+
+    /* Stop previous timer */
+
+    if(timer !== null){
+
+        clearTimeout(timer);
+
+        timer = null;
+    }
+
+
+    /* Create new session */
+
+    session++;
+
+    const mySession = session;
+
+
+    current = 0;
+
+    running = true;
+
+
+    /* Show first image */
+
+    showScene(1);
+
+
+    /* Small delay before speaking */
+
+    timer = setTimeout(function(){
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+        speakNext(mySession);
+
+    },300);
+
+}
+
+
+/* =========================
+   SPEAK NEXT PHRASE
+========================= */
+
+function speakNext(mySession){
+
+    if(
+        !running ||
+        mySession !== session
+    ){
+        return;
+    }
+
+
+    /* End of dialogue */
+
+    if(current >= dialogue.length){
+
+        running = false;
+
+        return;
+    }
+
+
+    /* Calculate scene */
+
+    const scene =
+        Math.floor(current / 2) + 1;
+
+
+    /* Show correct image */
+
+    showScene(scene);
+
+
+    /* Create speech */
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            dialogue[current]
+        );
+
+
+    speech.lang = "en-US";
+
+    speech.rate = 0.8;
+
+    speech.pitch = 1;
+
+    speech.volume = 1;
+
+
+    let finished = false;
+
+
+    /* Speech finished */
+
+    speech.onend = function(){
+
+        if(finished){
+            return;
+        }
+
+        finished = true;
+
+
+        if(
+            mySession !== session ||
+            !running
+        ){
+            return;
+        }
+
+
+        current++;
+
+
+        if(current < dialogue.length){
+
+            timer = setTimeout(function(){
+
+                if(
+                    mySession !== session ||
+                    !running
+                ){
+                    return;
+                }
+
+                speakNext(mySession);
+
+            },500);
+
+        }
+        else{
+
+            running = false;
+
+        }
+
+    };
+
+
+    /* Speech error */
+
+    speech.onerror = function(){
+
+        if(mySession !== session){
+            return;
+        }
+
+        finished = true;
+
+        running = false;
+
+    };
+
+
+    /* Speak */
+
+    speechSynthesis.speak(speech);
+
+}
+
+
+/* =========================
+   STOP
+========================= */
+
+function stopDialogue(){
+
+    /* Invalidate current session */
+
+    session++;
+
+    imageRequest++;
+
+
+    running = false;
+
+    current = 0;
+
+
+    /* Stop timer */
+
+    if(timer !== null){
+
+        clearTimeout(timer);
+
+        timer = null;
+    }
+
+
+    /* Stop voice */
+
+    speechSynthesis.cancel();
+
+
+    /* Return to first scene */
+
+    showScene(1);
+
+}
+
+
+/* =========================
+   INITIAL SCENE
+========================= */
+
+showScene(1);
+
+</script>
+
+</body>
+</html>
